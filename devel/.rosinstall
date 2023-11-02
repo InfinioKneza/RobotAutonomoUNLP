@@ -1,0 +1,2 @@
+- setup-file:
+    local-name: /home/robotAutonomoUNLP/locomotion_ws/devel/setup.sh
