@@ -1,5 +1,4 @@
 #!/usr/bin/env python3
-# license removed for brevity
 import rospy
 from std_msgs.msg import UInt64, Bool
 import RPi.GPIO as GPIO
@@ -16,6 +15,7 @@ pub = None
 
 # Variable para almacenar el estado anterior del pin A
 last_state_A = None
+
 
 def callback_encoder_B(channel):
     global encoder_count, last_state_A, counting, pub, target
@@ -38,23 +38,25 @@ def callback_encoder_B(channel):
         else:
             encoder_count += 1
 
-    print("Cuenta: " + str(encoder_count))
+    #print("Enc_B: " + str(encoder_count))
 
     if encoder_count >= target and counting:
+        print("Counted from B!")
         counting = False
         pub.publish(True)
 
     last_state_A = state_A
 
 
-def callback(data):
+def start_counting_cb(data):
     global encoder_count, counting, target
+
+    print("Starting counting from B")
 
     msg = data.data
     encoder_count = 0
     target = int(msg)
     counting = True
-    rospy.loginfo("Empiezo a contar: " + str(msg))
 
 
 if __name__ == '__main__':
@@ -63,12 +65,8 @@ if __name__ == '__main__':
     GPIO.setup(PIN_ENCODER_B2, GPIO.IN, pull_up_down=GPIO.PUD_UP)
     GPIO.add_event_detect(PIN_ENCODER_B1, GPIO.BOTH, callback=callback_encoder_B)
 
-    rospy.Subscriber('wait_pulses_b', UInt64, callback)
+    rospy.Subscriber('wait_pulses_b', UInt64, start_counting_cb)
     pub = rospy.Publisher("ready_b", Bool, queue_size=10)
     rospy.init_node('encoder_b')
     
     rospy.spin()
-    # try:
-    #     count_b()
-    # except rospy.ROSInterruptException:
-    #     pass
