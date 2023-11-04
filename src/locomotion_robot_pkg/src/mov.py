@@ -1,10 +1,10 @@
 #!/usr/bin/env python3
-# license removed for brevity
 import sys
 import rospy
-from time import sleep      # Import sleep from time
-import RPi.GPIO as GPIO     # Import Standard GPIO Module
+import time
+import RPi.GPIO as GPIO
 from std_msgs.msg import UInt64, Bool
+from locomotion_robot_pkg.msg import sub_move
 
 GPIO.setmode(GPIO.BOARD)      # Set GPIO mode to BCM
 GPIO.setwarnings(False)
@@ -27,6 +27,8 @@ pwma.start(100)
 pwmb.start(100)
 
 _continue = True
+start_time = None
+end_time = None
 
 ## Functions
 ###############################################################################
@@ -44,9 +46,6 @@ def turnLeft(spd):
     runMotor(0, spd, 0)
     runMotor(1, spd, 1)
 
-def turnRight(spd):
-    runMotor(0, spd, 1)
-    runMotor(1, spd, 0)
 
 def runMotor(motor, spd, direction):
     GPIO.output(22, GPIO.HIGH)
@@ -71,65 +70,48 @@ def motorStop():
     GPIO.output(22, GPIO.LOW)
 
 
-def next_move(data):
-    global _continue
+def next_move_b(data):
+    global _continue, start_time, end_time
 
-    rospy.loginfo("Listo movimiento")
+    end_time = time.time()
+    time_taken = "{:.3f}".format(end_time - start_time)
+    rospy.loginfo(f"Finish at: {time_taken}")
+    
     _continue = False
     motorStop()
 
-## Main
-##############################################################################
-def main(param):
-    global _continue
+def next_move_a(data):
+    global _continue, start_time, end_time
 
-    pub = rospy.Publisher("wait_pulses_b", UInt64, queue_size=10)
-    rospy.Subscriber("ready_b", Bool, next_move)
+    end_time = time.time()
+    time_taken = "{:.3f}".format(end_time - start_time)
+    rospy.loginfo(f"Finish at: {time_taken}")
+    
+    _continue = False
+    motorStop()
+
+def next_primitive(move):
+    print(move)
+
+### Main ###
+def main():
+    global _continue, start_time
+
+    # pub_pulses_to_a = rospy.Publisher("mlp/wait_pulses_a", UInt64, queue_size=10)
+    # pub_pulses_to_b = rospy.Publisher("mlp/wait_pulses_b", UInt64, queue_size=10)
+    # rospy.Subscriber("mlp/ready_b", Bool, next_move_b)
+    # rospy.Subscriber("mlp/ready_a", Bool, next_move_a)
+    rospy.Subscriber("sub_move", sub_move, next_primitive)
     rospy.init_node('mov')
 
-    distance = int(param)
+    #pub_pulses_to_b.publish(distance)
+    start_time = time.time()
 
-    pub.publish(distance)
-    print("empiezo")
-
-    forward(10)
-
-    while True:
-        if not _continue:
-            motorStop()    
+    #forward(50)
 
     rospy.spin()
-    """
-    while True:
-        if (param == 'forward' or param == 'both'):
-            forward(100)     # run motor forward
-            sleep(2)        # ... for 2 seconds
-            motorStop()     # ... stop motor
-            sleep(.2)      # delay between motor runs
 
-        if (param == 'reverse' or param == 'both'):
-            reverse(100)     # run motor in reverse
-            sleep(2)        # ... for 2 seoconds
-            motorStop()     # ... stop motor
-            sleep(.2)      # delay between motor runs
-
-        if (param == 'stop'):
-            motorStop()      # delay between motor runs
-        
-        
-        turnLeft(50)    # turn Left
-        sleep(2)        # ... for 2 seconds
-        motorStop()     # ... stop motors
-        sleep(.25)      # delay between motor runs
-        
-        turnRight(50)   # turn Right
-        sleep(2)        # ... for 2 seconds
-        motorStop()     # ... stop motors
-        sleep(2)        # delay between motor runs
-        """
 
 if __name__ == "__main__":
-    #print(sys.argv)
-    param = sys.argv[1]
-    main(param)
+    main()
 

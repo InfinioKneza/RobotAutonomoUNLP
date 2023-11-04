@@ -1,0 +1,26 @@
+<launch>
+    <!-- START A GROUP WITH A NAMESPACE -->
+    <group ns="mlp">
+        <!-- LAUNCH A "Plain Python" NODE -->
+        <node
+            pkg    = "locomotion_robot_pkg"
+            name   = "encoder_a"
+            output = "screen"
+            type   = "encoder_a.py"
+        />
+
+        <node
+            pkg    = "locomotion_robot_pkg"
+            name   = "encoder_b"
+            output = "screen"
+            type   = "encoder_b.py"
+        />
+
+        <node
+            pkg    = "locomotion_robot_pkg"
+            name   = "mov"
+            output = "screen"
+            type   = "mov.py"
+        />
+    </group>
+</launch>
