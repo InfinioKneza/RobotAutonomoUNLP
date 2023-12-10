@@ -3,6 +3,6 @@ prefix=/home/robotAutonomoUNLP/locomotion_ws/install
 Name: locomotion_robot_pkg
 Description: Description of locomotion_robot_pkg
 Version: 0.0.0
-Cflags: 
+Cflags: -I${prefix}/include
 Libs: -L${prefix}/lib 
-Requires: 
+Requires: message_runtime

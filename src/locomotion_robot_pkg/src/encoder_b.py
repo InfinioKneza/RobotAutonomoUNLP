@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
-# license removed for brevity
 import rospy
-from std_msgs.msg import UInt64, Bool
+import math
+from std_msgs.msg import Int64, Bool
 import RPi.GPIO as GPIO
 
 # Configura los pines de los encoders
@@ -17,8 +17,9 @@ pub = None
 # Variable para almacenar el estado anterior del pin A
 last_state_A = None
 
+
 def callback_encoder_B(channel):
-    global encoder_count, last_state_A, counting, pub, target
+    global encoder_count, last_state_A, counting, target
 
     # Lee el estado actual del pin A
     state_A = GPIO.input(PIN_ENCODER_B1)
@@ -38,23 +39,34 @@ def callback_encoder_B(channel):
         else:
             encoder_count += 1
 
-    print("Cuenta: " + str(encoder_count))
+    #print("Enc_B: " + str(encoder_count))
 
-    if encoder_count >= target and counting:
-        counting = False
-        pub.publish(True)
+    if counting:
+        if target >= 0:
+            if encoder_count >= target:
+                send_ready()
+        else:
+            if encoder_count <= target:
+                send_ready()
 
     last_state_A = state_A
 
+def send_ready():
+    global counting, pub
 
-def callback(data):
+    print("Counted from B!")
+    counting = False
+    pub.publish(True)
+
+
+def start_counting_cb(data):
     global encoder_count, counting, target
 
-    msg = data.data
-    encoder_count = 0
-    target = int(msg)
+    print("Starting counting from B")
+
+    target = int(data.data)
+    encoder_count = 0  # Resets counter
     counting = True
-    rospy.loginfo("Empiezo a contar: " + str(msg))
 
 
 if __name__ == '__main__':
@@ -63,12 +75,8 @@ if __name__ == '__main__':
     GPIO.setup(PIN_ENCODER_B2, GPIO.IN, pull_up_down=GPIO.PUD_UP)
     GPIO.add_event_detect(PIN_ENCODER_B1, GPIO.BOTH, callback=callback_encoder_B)
 
-    rospy.Subscriber('wait_pulses_b', UInt64, callback)
+    rospy.Subscriber('wait_pulses_b', Int64, start_counting_cb)
     pub = rospy.Publisher("ready_b", Bool, queue_size=10)
     rospy.init_node('encoder_b')
     
     rospy.spin()
-    # try:
-    #     count_b()
-    # except rospy.ROSInterruptException:
-    #     pass
