@@ -1,22 +1,6 @@
 <launch>
     <!-- LAUNCH of main NODES -->
 
-    <!-- Node for encoder A -->
-    <node
-        pkg    = "locomotion_robot_pkg"
-        name   = "encoder_a"
-        output = "screen"
-        type   = "encoder_a.py"
-    />
-
-    <!-- Node for encoder B -->
-    <node
-        pkg    = "locomotion_robot_pkg"
-        name   = "encoder_b"
-        output = "screen"
-        type   = "encoder_b.py"
-    />
-
     <!-- Node for movement control -->
     <node
         pkg    = "locomotion_robot_pkg"
@@ -31,5 +15,21 @@
         name   = "sync"
         output = "screen"
         type   = "sync.py"
+    />
+
+    <!-- Node for encoder A -->
+    <node
+        pkg    = "locomotion_robot_pkg"
+        name   = "encoder_a"
+        output = "screen"
+        type   = "encoder_a.py"
+    />
+
+    <!-- Node for encoder B -->
+    <node
+        pkg    = "locomotion_robot_pkg"
+        name   = "encoder_b"
+        output = "screen"
+        type   = "encoder_b.py"
     />
 </launch>
