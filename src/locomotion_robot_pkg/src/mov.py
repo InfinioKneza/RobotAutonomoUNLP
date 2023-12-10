@@ -10,12 +10,13 @@ go_to_next_sm = False # Flag to indicate if we are going to the next submovemnt
 SPEED = 50  # Speed of the motors
 WHEEL_DIAMETER = 13.5   # Diameter of the wheels
 ROBOT_DIAMETER = 27  # Diameter of the robot
+PULSES_PER_FULL_REVOLUTION = 2200  # Number of pulses per full revolution
 encoder_a_confirmation = False
 encoder_b_confirmation = False
 
 # Calculate pulses based on distance
 def calculate_pulses_by_distance(distance):
-    return int((float(distance) * 2200) / (math.pi * WHEEL_DIAMETER))
+    return int((float(distance) * PULSES_PER_FULL_REVOLUTION) / (math.pi * WHEEL_DIAMETER))
 
 # Calculate pulses based on angle
 def calculate_pulses_by_angle(angle):
@@ -157,8 +158,8 @@ if __name__ == "__main__":
     GPIO.setup(13, GPIO.OUT)    # BIN2
     GPIO.setup(11, GPIO.OUT)    # PWMB
 
-    pwma = GPIO.PWM(12, pwmFreq)    # pin 18 to PWM  
-    pwmb = GPIO.PWM(11, pwmFreq)    # pin 13 to PWM
+    pwma = GPIO.PWM(12, pwmFreq)    # pin 12 to PWM  
+    pwmb = GPIO.PWM(11, pwmFreq)    # pin 11 to PWM
 
     # ROS Publishers and Subscribers initialization
     pub_pulses_to_a = rospy.Publisher("wait_pulses_a", Int64, queue_size=10)
