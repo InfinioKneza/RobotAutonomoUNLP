@@ -24,4 +24,12 @@
         output = "screen"
         type   = "mov.py"
     />
+
+    <!-- Node for syncronization -->
+    <node
+        pkg    = "locomotion_robot_pkg"
+        name   = "sync"
+        output = "screen"
+        type   = "sync.py"
+    />
 </launch>
