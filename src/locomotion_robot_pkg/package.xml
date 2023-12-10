@@ -4,6 +4,9 @@
   <version>0.0.0</version>
   <description>The locomotion_robot_pkg package</description>
 
+  <!-- One maintainer tag required, multiple allowed, one person per tag -->
+  <!-- Example:  -->
+  <!-- <maintainer email="jane.doe@example.com">Jane Doe</maintainer> -->
   <maintainer email="tadeo.deluca2002@gmail.com">Tadeo Deluca</maintainer>
   <license>MIT</license>
 
@@ -13,10 +16,10 @@
   <!-- <url type="website">http://wiki.ros.org/locomotion_robot_pkg</url> -->
 
   <author email="tadeo.deluca2002@gmail.com">Tadeo Deluca</author>
-  <author email="tadeo.deluca2002@gmail.com">Lucio Canessa</author>
-  <author email="tadeo.deluca2002@gmail.com">Gabriel Paladino</author>
-  <author email="tadeo.deluca2002@gmail.com">Lautaro Petrigh</author>
-  <author email="tadeo.deluca2002@gmail.com">Adriel Reverte</author>
+  <author email="luciocanessa@gmail.com">Lucio Canessa</author>
+  <author email="gabrielpaladino24@alu.ing.unlp.edu.ar">Gabriel Paladino</author>
+  <author email="petrighlautaro@alu.ing.unlp.edu.ar">Lautaro Petrigh</author>
+  <author email="reverteadriel@gmail.com">Adriel Reverte</author>
 
   <!-- The *depend tags are used to specify dependencies -->
   <!-- Dependencies can be catkin packages or system dependencies -->
