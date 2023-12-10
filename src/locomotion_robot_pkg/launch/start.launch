@@ -1,5 +1,7 @@
 <launch>
-    <!-- LAUNCH A "Plain Python" NODE -->
+    <!-- LAUNCH of main NODES -->
+
+    <!-- Node for encoder A -->
     <node
         pkg    = "locomotion_robot_pkg"
         name   = "encoder_a"
@@ -7,6 +9,7 @@
         type   = "encoder_a.py"
     />
 
+    <!-- Node for encoder B -->
     <node
         pkg    = "locomotion_robot_pkg"
         name   = "encoder_b"
@@ -14,6 +17,7 @@
         type   = "encoder_b.py"
     />
 
+    <!-- Node for movement control -->
     <node
         pkg    = "locomotion_robot_pkg"
         name   = "mov"
