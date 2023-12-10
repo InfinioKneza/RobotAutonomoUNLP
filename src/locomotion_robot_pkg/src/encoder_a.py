@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+import time
 import rospy
 from std_msgs.msg import Int64, Bool
 import RPi.GPIO as GPIO
@@ -11,15 +12,18 @@ PIN_ENCODER_A2 = 31
 encoder_count = 0
 target = 0  # Target encoder count
 counting = False  # Flag to indicate if we are counting
-pub = None  # Publisher to send encoder count
+pub_ready = None  # Publisher to send confirmation
+pub_encoder_count = None  # Publisher to send encoder count
 
 # Variable to store the previous state of pin A
 last_state_A = None
 
+start_time = 0
+
 def callback_encoder_A(channel):
     """""Callback function for encoder A."""""
-    
-    global encoder_count, last_state_A, counting, target
+
+    global encoder_count, last_state_A, counting, target, start_time, pub_encoder_count
 
     # Read the current state of pin A1
     state_A1 = GPIO.input(PIN_ENCODER_A1)
@@ -30,7 +34,7 @@ def callback_encoder_A(channel):
     if last_state_A is None:
         last_state_A = state_A1
         return
-
+    
     # Check for a change in encoder
     if state_A1 != last_state_A:
         # Si el pin B está en el mismo estado que el pin A, gira en un sentido
@@ -38,6 +42,14 @@ def callback_encoder_A(channel):
             encoder_count += 1
         else:
             encoder_count -= 1
+
+    # Calculate elapsed time
+    elapsed_time = time.time() - start_time
+
+    # Publish encoder count when elapsed time is greater than 0.1
+    if elapsed_time > 0.1:
+        pub_encoder_count.publish(encoder_count)
+        start_time = time.time()
 
     #print("Enc_A: " + str(encoder_count))
 
@@ -52,11 +64,11 @@ def callback_encoder_A(channel):
     last_state_A = state_A1
 
 def send_ready():
-    global counting, pub
+    global counting, pub_ready
 
     print("Counted from A!")
     counting = False
-    pub.publish(True)
+    pub_ready.publish(True)
 
 
 def start_counting_cb(data):
@@ -81,7 +93,8 @@ if __name__ == '__main__':
 
     # Initialize node
     rospy.Subscriber('wait_pulses_a', Int64, start_counting_cb)
-    pub = rospy.Publisher("ready_a", Bool, queue_size=10)
+    pub_ready = rospy.Publisher("ready_a", Bool, queue_size=10)
+    pub_encoder_count = rospy.Publisher("encoder_count_a", Int64, queue_size=10)
     rospy.init_node('encoder_a')
     
     rospy.spin()

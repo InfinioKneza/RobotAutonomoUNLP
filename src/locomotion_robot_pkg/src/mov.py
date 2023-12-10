@@ -92,19 +92,14 @@ def runMotor(motor, spd, direction):
         GPIO.output(13, in2)
         pwmb.start(spd)
 
-# Check encoder confirmations
-def check_confirmations():
-    global encoder_a_confirmation, encoder_b_confirmation
-    return encoder_a_confirmation and encoder_b_confirmation
 
 # Confirm encoder A
 def conf_encoder_a(data):
     global go_to_next_sm, encoder_a_confirmation, encoder_b_confirmation
 
     encoder_a_confirmation = True
-    go_to_next_sm = check_confirmations()
 
-    if go_to_next_sm:
+    if encoder_b_confirmation:
         next_primitive()
 
 # Confirm encoder B
@@ -112,9 +107,8 @@ def conf_encoder_b(data):
     global go_to_next_sm, encoder_a_confirmation, encoder_b_confirmation
 
     encoder_b_confirmation = True
-    go_to_next_sm = check_confirmations()
 
-    if go_to_next_sm:
+    if encoder_a_confirmation:
         next_primitive()
 
 # Move to next primitive
@@ -158,8 +152,8 @@ if __name__ == "__main__":
     GPIO.setup(13, GPIO.OUT)    # BIN2
     GPIO.setup(11, GPIO.OUT)    # PWMB
 
-    pwma = GPIO.PWM(12, pwmFreq)    # pin 12 to PWM  
-    pwmb = GPIO.PWM(11, pwmFreq)    # pin 11 to PWM
+    pwma = GPIO.PWM(12, pwmFreq)  # pin 12 to PWM  
+    pwmb = GPIO.PWM(11, pwmFreq)  # pin 11 to PWM
 
     # ROS Publishers and Subscribers initialization
     pub_pulses_to_a = rospy.Publisher("wait_pulses_a", Int64, queue_size=10)
