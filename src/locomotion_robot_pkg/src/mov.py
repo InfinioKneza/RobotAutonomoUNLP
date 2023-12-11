@@ -22,12 +22,8 @@ def calculate_pulses_by_distance(distance):
 
 # Calculate pulses based on angle
 def calculate_pulses_by_angle(angle):
-<<<<<<< HEAD
     angle += EXTRA_ANGLE
     distance = (ROBOT_DIAMETER * math.pi) * angle/360
-=======
-    distance = (ROBOT_DIAMETER * math.pi) * angle / 360
->>>>>>> 01e3b24f89dad853bb37014c6e3bd8065569cce5
     return calculate_pulses_by_distance(distance)
 
 # Move functions
