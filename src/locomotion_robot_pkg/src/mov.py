@@ -1,28 +1,36 @@
 #!/usr/bin/env python3
-import sys
 import rospy
 import math
 import RPi.GPIO as GPIO
 from std_msgs.msg import Int64, Bool, Empty
 from locomotion_robot_pkg.msg import sub_move
 
-go_to_next_sm = False
-SPEED = 90
-WHEEL_DIAMETER = 13.5
-ROBOT_DIAMETER = 27
+# Initialize variables
+go_to_next_sm = False # Flag to indicate if we are going to the next submovemnt
+SPEED = 50  # Speed of the motors
+WHEEL_DIAMETER = 13.5   # Diameter of the wheels
+ROBOT_DIAMETER = 27  # Diameter of the robot
+PULSES_PER_FULL_REVOLUTION = 2200  # Number of pulses per full revolution
+
 encoder_a_confirmation = False
 encoder_b_confirmation = False
 EXTRA_ANGLE = 45
 
-## Functions ##
+# Calculate pulses based on distance
 def calculate_pulses_by_distance(distance):
-    return int((float(distance) * 2200) / (math.pi * WHEEL_DIAMETER))
+    return int((float(distance) * PULSES_PER_FULL_REVOLUTION) / (math.pi * WHEEL_DIAMETER))
 
+# Calculate pulses based on angle
 def calculate_pulses_by_angle(angle):
+<<<<<<< HEAD
     angle += EXTRA_ANGLE
     distance = (ROBOT_DIAMETER * math.pi) * angle/360
+=======
+    distance = (ROBOT_DIAMETER * math.pi) * angle / 360
+>>>>>>> 01e3b24f89dad853bb37014c6e3bd8065569cce5
     return calculate_pulses_by_distance(distance)
 
+# Move functions
 def forward(args):
     global SPEED, pub_pulses_to_a, pub_pulses_to_b
 
@@ -39,7 +47,7 @@ def reverse(args):
 
     pulses = calculate_pulses_by_distance(args[0])
 
-    pub_pulses_to_a.publish(-pulses)
+    pub_pulses_to_a.publish(-pulses)  # Negative because we are going backwards
     pub_pulses_to_b.publish(-pulses)
 
     runMotor(0, SPEED, 1)
@@ -67,51 +75,50 @@ def right(args):
     runMotor(0, SPEED, 1)
     runMotor(1, SPEED, 0)
 
+# Stop motor function
 def motorStop():
     GPIO.output(22, GPIO.LOW)
 
+# Run motor function
 def runMotor(motor, spd, direction):
     GPIO.output(22, GPIO.HIGH)
     in1 = GPIO.HIGH
     in2 = GPIO.LOW
 
-    if(direction == 1):
+    # Reverse direction for going backwards
+    if direction == 1:
         in1 = GPIO.LOW
         in2 = GPIO.HIGH
 
-    if(motor == 0):
+    if motor == 0:
         GPIO.output(16, in1)
         GPIO.output(18, in2)
         pwma.start(spd)
-    elif(motor == 1):
+    elif motor == 1:
         GPIO.output(15, in1)
         GPIO.output(13, in2)
         pwmb.start(spd)
-    
-def check_confirmations():
-    global encoder_a_confirmation, encoder_b_confirmation
-
-    return encoder_a_confirmation and encoder_b_confirmation
 
 
+# Confirm encoder A
 def conf_encoder_a(data):
     global go_to_next_sm, encoder_a_confirmation, encoder_b_confirmation
 
     encoder_a_confirmation = True
-    go_to_next_sm = check_confirmations()
 
-    if go_to_next_sm:
+    if encoder_b_confirmation:
         next_primitive()
 
+# Confirm encoder B
 def conf_encoder_b(data):
     global go_to_next_sm, encoder_a_confirmation, encoder_b_confirmation
-    
-    encoder_b_confirmation = True
-    go_to_next_sm = check_confirmations()
 
-    if go_to_next_sm:
+    encoder_b_confirmation = True
+
+    if encoder_a_confirmation:
         next_primitive()
 
+# Move to next primitive
 def next_primitive():
     global encoder_a_confirmation, encoder_b_confirmation, pub_next
 
@@ -120,13 +127,14 @@ def next_primitive():
     motorStop()
     pub_next.publish()
 
-
+# Receive primitive to execute
 def receive_primitive(move):
-    sub_move = str(move.primitive.data)
-    arguments = [int(move.distance.data), int(move.angle.data)]
+    sub_move = str(move.primitive.data)  # Get sub move
+    arguments = [int(move.distance.data), int(move.angle.data)]  # Get distance and angle
 
     print("Sub move: " + sub_move)
 
+    # Check if sub move is valid
     if sub_move == "ack":
         return
     else:
@@ -134,9 +142,9 @@ def receive_primitive(move):
             func_to_call = globals()[sub_move]
             func_to_call(arguments)
 
-
+# Initialize GPIO
 if __name__ == "__main__":
-    GPIO.setmode(GPIO.BOARD)      # Set GPIO mode to BCM
+    GPIO.setmode(GPIO.BOARD)
     GPIO.setwarnings(False)
 
     # PWM Frequency
@@ -151,16 +159,20 @@ if __name__ == "__main__":
     GPIO.setup(13, GPIO.OUT)    # BIN2
     GPIO.setup(11, GPIO.OUT)    # PWMB
 
-    pwma = GPIO.PWM(12, pwmFreq)    # pin 18 to PWM  
-    pwmb = GPIO.PWM(11, pwmFreq)    # pin 13 to PWM
+    pwma = GPIO.PWM(12, pwmFreq)  # pin 12 to PWM  
+    pwmb = GPIO.PWM(11, pwmFreq)  # pin 11 to PWM
 
+    # ROS Publishers and Subscribers initialization
     pub_pulses_to_a = rospy.Publisher("wait_pulses_a", Int64, queue_size=10)
     pub_pulses_to_b = rospy.Publisher("wait_pulses_b", Int64, queue_size=10)
     pub_next = rospy.Publisher("next_sm", Empty, queue_size=10)
+
+    # Add subscribers for encoder A and B
     rospy.Subscriber("ready_a", Bool, conf_encoder_a)
     rospy.Subscriber("ready_b", Bool, conf_encoder_b)
+    # Add subscriber for sub move
     rospy.Subscriber("sub_move", sub_move, receive_primitive)
+    # Initialize node
     rospy.init_node('mov')
 
     rospy.spin()
-
