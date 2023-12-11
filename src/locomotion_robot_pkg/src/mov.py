@@ -7,17 +7,19 @@ from std_msgs.msg import Int64, Bool, Empty
 from locomotion_robot_pkg.msg import sub_move
 
 go_to_next_sm = False
-SPEED = 50
+SPEED = 90
 WHEEL_DIAMETER = 13.5
 ROBOT_DIAMETER = 27
 encoder_a_confirmation = False
 encoder_b_confirmation = False
+EXTRA_ANGLE = 45
 
 ## Functions ##
 def calculate_pulses_by_distance(distance):
     return int((float(distance) * 2200) / (math.pi * WHEEL_DIAMETER))
 
 def calculate_pulses_by_angle(angle):
+    angle += EXTRA_ANGLE
     distance = (ROBOT_DIAMETER * math.pi) * angle/360
     return calculate_pulses_by_distance(distance)
 
