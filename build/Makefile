@@ -467,6 +467,32 @@ std_msgs_generate_messages_cpp/fast:
 .PHONY : std_msgs_generate_messages_cpp/fast
 
 #=============================================================================
+# Target rules for targets named _locomotion_robot_pkg_generate_messages_check_deps_sync_type
+
+# Build rule for target.
+_locomotion_robot_pkg_generate_messages_check_deps_sync_type: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 _locomotion_robot_pkg_generate_messages_check_deps_sync_type
+.PHONY : _locomotion_robot_pkg_generate_messages_check_deps_sync_type
+
+# fast build rule for target.
+_locomotion_robot_pkg_generate_messages_check_deps_sync_type/fast:
+	$(MAKE) -f locomotion_robot_pkg/CMakeFiles/_locomotion_robot_pkg_generate_messages_check_deps_sync_type.dir/build.make locomotion_robot_pkg/CMakeFiles/_locomotion_robot_pkg_generate_messages_check_deps_sync_type.dir/build
+.PHONY : _locomotion_robot_pkg_generate_messages_check_deps_sync_type/fast
+
+#=============================================================================
+# Target rules for targets named locomotion_robot_pkg_genpy
+
+# Build rule for target.
+locomotion_robot_pkg_genpy: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 locomotion_robot_pkg_genpy
+.PHONY : locomotion_robot_pkg_genpy
+
+# fast build rule for target.
+locomotion_robot_pkg_genpy/fast:
+	$(MAKE) -f locomotion_robot_pkg/CMakeFiles/locomotion_robot_pkg_genpy.dir/build.make locomotion_robot_pkg/CMakeFiles/locomotion_robot_pkg_genpy.dir/build
+.PHONY : locomotion_robot_pkg_genpy/fast
+
+#=============================================================================
 # Target rules for targets named locomotion_robot_pkg_generate_messages
 
 # Build rule for target.
@@ -584,17 +610,17 @@ locomotion_robot_pkg_generate_messages_py/fast:
 .PHONY : locomotion_robot_pkg_generate_messages_py/fast
 
 #=============================================================================
-# Target rules for targets named locomotion_robot_pkg_genpy
+# Target rules for targets named _locomotion_robot_pkg_generate_messages_check_deps_motor_speeds
 
 # Build rule for target.
-locomotion_robot_pkg_genpy: cmake_check_build_system
-	$(MAKE) -f CMakeFiles/Makefile2 locomotion_robot_pkg_genpy
-.PHONY : locomotion_robot_pkg_genpy
+_locomotion_robot_pkg_generate_messages_check_deps_motor_speeds: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 _locomotion_robot_pkg_generate_messages_check_deps_motor_speeds
+.PHONY : _locomotion_robot_pkg_generate_messages_check_deps_motor_speeds
 
 # fast build rule for target.
-locomotion_robot_pkg_genpy/fast:
-	$(MAKE) -f locomotion_robot_pkg/CMakeFiles/locomotion_robot_pkg_genpy.dir/build.make locomotion_robot_pkg/CMakeFiles/locomotion_robot_pkg_genpy.dir/build
-.PHONY : locomotion_robot_pkg_genpy/fast
+_locomotion_robot_pkg_generate_messages_check_deps_motor_speeds/fast:
+	$(MAKE) -f locomotion_robot_pkg/CMakeFiles/_locomotion_robot_pkg_generate_messages_check_deps_motor_speeds.dir/build.make locomotion_robot_pkg/CMakeFiles/_locomotion_robot_pkg_generate_messages_check_deps_motor_speeds.dir/build
+.PHONY : _locomotion_robot_pkg_generate_messages_check_deps_motor_speeds/fast
 
 # Help Target
 help:
@@ -632,6 +658,8 @@ help:
 	@echo "... std_msgs_generate_messages_eus"
 	@echo "... _locomotion_robot_pkg_generate_messages_check_deps_sub_move"
 	@echo "... std_msgs_generate_messages_cpp"
+	@echo "... _locomotion_robot_pkg_generate_messages_check_deps_sync_type"
+	@echo "... locomotion_robot_pkg_genpy"
 	@echo "... locomotion_robot_pkg_generate_messages"
 	@echo "... locomotion_robot_pkg_gencpp"
 	@echo "... locomotion_robot_pkg_generate_messages_eus"
@@ -641,7 +669,7 @@ help:
 	@echo "... run_tests_locomotion_robot_pkg_roslaunch-check_launch"
 	@echo "... locomotion_robot_pkg_gennodejs"
 	@echo "... locomotion_robot_pkg_generate_messages_py"
-	@echo "... locomotion_robot_pkg_genpy"
+	@echo "... _locomotion_robot_pkg_generate_messages_check_deps_motor_speeds"
 .PHONY : help
 
 

@@ -54,17 +54,34 @@ CMAKE_BINARY_DIR = /home/robotAutonomoUNLP/locomotion_ws/build
 include locomotion_robot_pkg/CMakeFiles/locomotion_robot_pkg_generate_messages_nodejs.dir/progress.make
 
 locomotion_robot_pkg/CMakeFiles/locomotion_robot_pkg_generate_messages_nodejs: /home/robotAutonomoUNLP/locomotion_ws/devel/share/gennodejs/ros/locomotion_robot_pkg/msg/sub_move.js
+locomotion_robot_pkg/CMakeFiles/locomotion_robot_pkg_generate_messages_nodejs: /home/robotAutonomoUNLP/locomotion_ws/devel/share/gennodejs/ros/locomotion_robot_pkg/msg/sync_type.js
+locomotion_robot_pkg/CMakeFiles/locomotion_robot_pkg_generate_messages_nodejs: /home/robotAutonomoUNLP/locomotion_ws/devel/share/gennodejs/ros/locomotion_robot_pkg/msg/motor_speeds.js
 
 
 /home/robotAutonomoUNLP/locomotion_ws/devel/share/gennodejs/ros/locomotion_robot_pkg/msg/sub_move.js: /opt/ros/noetic/lib/gennodejs/gen_nodejs.py
 /home/robotAutonomoUNLP/locomotion_ws/devel/share/gennodejs/ros/locomotion_robot_pkg/msg/sub_move.js: /home/robotAutonomoUNLP/locomotion_ws/src/locomotion_robot_pkg/msg/sub_move.msg
-/home/robotAutonomoUNLP/locomotion_ws/devel/share/gennodejs/ros/locomotion_robot_pkg/msg/sub_move.js: /opt/ros/noetic/share/std_msgs/msg/String.msg
 /home/robotAutonomoUNLP/locomotion_ws/devel/share/gennodejs/ros/locomotion_robot_pkg/msg/sub_move.js: /opt/ros/noetic/share/std_msgs/msg/Int32.msg
+/home/robotAutonomoUNLP/locomotion_ws/devel/share/gennodejs/ros/locomotion_robot_pkg/msg/sub_move.js: /opt/ros/noetic/share/std_msgs/msg/String.msg
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/robotAutonomoUNLP/locomotion_ws/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Generating Javascript code from locomotion_robot_pkg/sub_move.msg"
 	cd /home/robotAutonomoUNLP/locomotion_ws/build/locomotion_robot_pkg && ../catkin_generated/env_cached.sh /usr/bin/python3 /opt/ros/noetic/share/gennodejs/cmake/../../../lib/gennodejs/gen_nodejs.py /home/robotAutonomoUNLP/locomotion_ws/src/locomotion_robot_pkg/msg/sub_move.msg -Ilocomotion_robot_pkg:/home/robotAutonomoUNLP/locomotion_ws/src/locomotion_robot_pkg/msg -Istd_msgs:/opt/ros/noetic/share/std_msgs/cmake/../msg -p locomotion_robot_pkg -o /home/robotAutonomoUNLP/locomotion_ws/devel/share/gennodejs/ros/locomotion_robot_pkg/msg
 
+/home/robotAutonomoUNLP/locomotion_ws/devel/share/gennodejs/ros/locomotion_robot_pkg/msg/sync_type.js: /opt/ros/noetic/lib/gennodejs/gen_nodejs.py
+/home/robotAutonomoUNLP/locomotion_ws/devel/share/gennodejs/ros/locomotion_robot_pkg/msg/sync_type.js: /home/robotAutonomoUNLP/locomotion_ws/src/locomotion_robot_pkg/msg/sync_type.msg
+/home/robotAutonomoUNLP/locomotion_ws/devel/share/gennodejs/ros/locomotion_robot_pkg/msg/sync_type.js: /opt/ros/noetic/share/std_msgs/msg/UInt8.msg
+/home/robotAutonomoUNLP/locomotion_ws/devel/share/gennodejs/ros/locomotion_robot_pkg/msg/sync_type.js: /opt/ros/noetic/share/std_msgs/msg/Float32.msg
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/robotAutonomoUNLP/locomotion_ws/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Generating Javascript code from locomotion_robot_pkg/sync_type.msg"
+	cd /home/robotAutonomoUNLP/locomotion_ws/build/locomotion_robot_pkg && ../catkin_generated/env_cached.sh /usr/bin/python3 /opt/ros/noetic/share/gennodejs/cmake/../../../lib/gennodejs/gen_nodejs.py /home/robotAutonomoUNLP/locomotion_ws/src/locomotion_robot_pkg/msg/sync_type.msg -Ilocomotion_robot_pkg:/home/robotAutonomoUNLP/locomotion_ws/src/locomotion_robot_pkg/msg -Istd_msgs:/opt/ros/noetic/share/std_msgs/cmake/../msg -p locomotion_robot_pkg -o /home/robotAutonomoUNLP/locomotion_ws/devel/share/gennodejs/ros/locomotion_robot_pkg/msg
+
+/home/robotAutonomoUNLP/locomotion_ws/devel/share/gennodejs/ros/locomotion_robot_pkg/msg/motor_speeds.js: /opt/ros/noetic/lib/gennodejs/gen_nodejs.py
+/home/robotAutonomoUNLP/locomotion_ws/devel/share/gennodejs/ros/locomotion_robot_pkg/msg/motor_speeds.js: /home/robotAutonomoUNLP/locomotion_ws/src/locomotion_robot_pkg/msg/motor_speeds.msg
+/home/robotAutonomoUNLP/locomotion_ws/devel/share/gennodejs/ros/locomotion_robot_pkg/msg/motor_speeds.js: /opt/ros/noetic/share/std_msgs/msg/Float32.msg
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/robotAutonomoUNLP/locomotion_ws/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Generating Javascript code from locomotion_robot_pkg/motor_speeds.msg"
+	cd /home/robotAutonomoUNLP/locomotion_ws/build/locomotion_robot_pkg && ../catkin_generated/env_cached.sh /usr/bin/python3 /opt/ros/noetic/share/gennodejs/cmake/../../../lib/gennodejs/gen_nodejs.py /home/robotAutonomoUNLP/locomotion_ws/src/locomotion_robot_pkg/msg/motor_speeds.msg -Ilocomotion_robot_pkg:/home/robotAutonomoUNLP/locomotion_ws/src/locomotion_robot_pkg/msg -Istd_msgs:/opt/ros/noetic/share/std_msgs/cmake/../msg -p locomotion_robot_pkg -o /home/robotAutonomoUNLP/locomotion_ws/devel/share/gennodejs/ros/locomotion_robot_pkg/msg
+
 locomotion_robot_pkg_generate_messages_nodejs: locomotion_robot_pkg/CMakeFiles/locomotion_robot_pkg_generate_messages_nodejs
 locomotion_robot_pkg_generate_messages_nodejs: /home/robotAutonomoUNLP/locomotion_ws/devel/share/gennodejs/ros/locomotion_robot_pkg/msg/sub_move.js
+locomotion_robot_pkg_generate_messages_nodejs: /home/robotAutonomoUNLP/locomotion_ws/devel/share/gennodejs/ros/locomotion_robot_pkg/msg/sync_type.js
+locomotion_robot_pkg_generate_messages_nodejs: /home/robotAutonomoUNLP/locomotion_ws/devel/share/gennodejs/ros/locomotion_robot_pkg/msg/motor_speeds.js
 locomotion_robot_pkg_generate_messages_nodejs: locomotion_robot_pkg/CMakeFiles/locomotion_robot_pkg_generate_messages_nodejs.dir/build.make
 
 .PHONY : locomotion_robot_pkg_generate_messages_nodejs

@@ -1,6 +1,6 @@
 # generated from genmsg/cmake/pkg-genmsg.cmake.em
 
-message(STATUS "locomotion_robot_pkg: 1 messages, 0 services")
+message(STATUS "locomotion_robot_pkg: 3 messages, 0 services")
 
 set(MSG_I_FLAGS "-Ilocomotion_robot_pkg:/home/robotAutonomoUNLP/locomotion_ws/src/locomotion_robot_pkg/msg;-Istd_msgs:/opt/ros/noetic/share/std_msgs/cmake/../msg")
 
@@ -19,7 +19,17 @@ add_custom_target(locomotion_robot_pkg_generate_messages ALL)
 
 get_filename_component(_filename "/home/robotAutonomoUNLP/locomotion_ws/src/locomotion_robot_pkg/msg/sub_move.msg" NAME_WE)
 add_custom_target(_locomotion_robot_pkg_generate_messages_check_deps_${_filename}
-  COMMAND ${CATKIN_ENV} ${PYTHON_EXECUTABLE} ${GENMSG_CHECK_DEPS_SCRIPT} "locomotion_robot_pkg" "/home/robotAutonomoUNLP/locomotion_ws/src/locomotion_robot_pkg/msg/sub_move.msg" "std_msgs/String:std_msgs/Int32"
+  COMMAND ${CATKIN_ENV} ${PYTHON_EXECUTABLE} ${GENMSG_CHECK_DEPS_SCRIPT} "locomotion_robot_pkg" "/home/robotAutonomoUNLP/locomotion_ws/src/locomotion_robot_pkg/msg/sub_move.msg" "std_msgs/Int32:std_msgs/String"
+)
+
+get_filename_component(_filename "/home/robotAutonomoUNLP/locomotion_ws/src/locomotion_robot_pkg/msg/sync_type.msg" NAME_WE)
+add_custom_target(_locomotion_robot_pkg_generate_messages_check_deps_${_filename}
+  COMMAND ${CATKIN_ENV} ${PYTHON_EXECUTABLE} ${GENMSG_CHECK_DEPS_SCRIPT} "locomotion_robot_pkg" "/home/robotAutonomoUNLP/locomotion_ws/src/locomotion_robot_pkg/msg/sync_type.msg" "std_msgs/UInt8:std_msgs/Float32"
+)
+
+get_filename_component(_filename "/home/robotAutonomoUNLP/locomotion_ws/src/locomotion_robot_pkg/msg/motor_speeds.msg" NAME_WE)
+add_custom_target(_locomotion_robot_pkg_generate_messages_check_deps_${_filename}
+  COMMAND ${CATKIN_ENV} ${PYTHON_EXECUTABLE} ${GENMSG_CHECK_DEPS_SCRIPT} "locomotion_robot_pkg" "/home/robotAutonomoUNLP/locomotion_ws/src/locomotion_robot_pkg/msg/motor_speeds.msg" "std_msgs/Float32"
 )
 
 #
@@ -31,7 +41,19 @@ add_custom_target(_locomotion_robot_pkg_generate_messages_check_deps_${_filename
 _generate_msg_cpp(locomotion_robot_pkg
   "/home/robotAutonomoUNLP/locomotion_ws/src/locomotion_robot_pkg/msg/sub_move.msg"
   "${MSG_I_FLAGS}"
-  "/opt/ros/noetic/share/std_msgs/cmake/../msg/String.msg;/opt/ros/noetic/share/std_msgs/cmake/../msg/Int32.msg"
+  "/opt/ros/noetic/share/std_msgs/cmake/../msg/Int32.msg;/opt/ros/noetic/share/std_msgs/cmake/../msg/String.msg"
+  ${CATKIN_DEVEL_PREFIX}/${gencpp_INSTALL_DIR}/locomotion_robot_pkg
+)
+_generate_msg_cpp(locomotion_robot_pkg
+  "/home/robotAutonomoUNLP/locomotion_ws/src/locomotion_robot_pkg/msg/sync_type.msg"
+  "${MSG_I_FLAGS}"
+  "/opt/ros/noetic/share/std_msgs/cmake/../msg/UInt8.msg;/opt/ros/noetic/share/std_msgs/cmake/../msg/Float32.msg"
+  ${CATKIN_DEVEL_PREFIX}/${gencpp_INSTALL_DIR}/locomotion_robot_pkg
+)
+_generate_msg_cpp(locomotion_robot_pkg
+  "/home/robotAutonomoUNLP/locomotion_ws/src/locomotion_robot_pkg/msg/motor_speeds.msg"
+  "${MSG_I_FLAGS}"
+  "/opt/ros/noetic/share/std_msgs/cmake/../msg/Float32.msg"
   ${CATKIN_DEVEL_PREFIX}/${gencpp_INSTALL_DIR}/locomotion_robot_pkg
 )
 
@@ -51,6 +73,10 @@ add_dependencies(locomotion_robot_pkg_generate_messages locomotion_robot_pkg_gen
 # add dependencies to all check dependencies targets
 get_filename_component(_filename "/home/robotAutonomoUNLP/locomotion_ws/src/locomotion_robot_pkg/msg/sub_move.msg" NAME_WE)
 add_dependencies(locomotion_robot_pkg_generate_messages_cpp _locomotion_robot_pkg_generate_messages_check_deps_${_filename})
+get_filename_component(_filename "/home/robotAutonomoUNLP/locomotion_ws/src/locomotion_robot_pkg/msg/sync_type.msg" NAME_WE)
+add_dependencies(locomotion_robot_pkg_generate_messages_cpp _locomotion_robot_pkg_generate_messages_check_deps_${_filename})
+get_filename_component(_filename "/home/robotAutonomoUNLP/locomotion_ws/src/locomotion_robot_pkg/msg/motor_speeds.msg" NAME_WE)
+add_dependencies(locomotion_robot_pkg_generate_messages_cpp _locomotion_robot_pkg_generate_messages_check_deps_${_filename})
 
 # target for backward compatibility
 add_custom_target(locomotion_robot_pkg_gencpp)
@@ -64,7 +90,19 @@ list(APPEND ${PROJECT_NAME}_EXPORTED_TARGETS locomotion_robot_pkg_generate_messa
 _generate_msg_eus(locomotion_robot_pkg
   "/home/robotAutonomoUNLP/locomotion_ws/src/locomotion_robot_pkg/msg/sub_move.msg"
   "${MSG_I_FLAGS}"
-  "/opt/ros/noetic/share/std_msgs/cmake/../msg/String.msg;/opt/ros/noetic/share/std_msgs/cmake/../msg/Int32.msg"
+  "/opt/ros/noetic/share/std_msgs/cmake/../msg/Int32.msg;/opt/ros/noetic/share/std_msgs/cmake/../msg/String.msg"
+  ${CATKIN_DEVEL_PREFIX}/${geneus_INSTALL_DIR}/locomotion_robot_pkg
+)
+_generate_msg_eus(locomotion_robot_pkg
+  "/home/robotAutonomoUNLP/locomotion_ws/src/locomotion_robot_pkg/msg/sync_type.msg"
+  "${MSG_I_FLAGS}"
+  "/opt/ros/noetic/share/std_msgs/cmake/../msg/UInt8.msg;/opt/ros/noetic/share/std_msgs/cmake/../msg/Float32.msg"
+  ${CATKIN_DEVEL_PREFIX}/${geneus_INSTALL_DIR}/locomotion_robot_pkg
+)
+_generate_msg_eus(locomotion_robot_pkg
+  "/home/robotAutonomoUNLP/locomotion_ws/src/locomotion_robot_pkg/msg/motor_speeds.msg"
+  "${MSG_I_FLAGS}"
+  "/opt/ros/noetic/share/std_msgs/cmake/../msg/Float32.msg"
   ${CATKIN_DEVEL_PREFIX}/${geneus_INSTALL_DIR}/locomotion_robot_pkg
 )
 
@@ -84,6 +122,10 @@ add_dependencies(locomotion_robot_pkg_generate_messages locomotion_robot_pkg_gen
 # add dependencies to all check dependencies targets
 get_filename_component(_filename "/home/robotAutonomoUNLP/locomotion_ws/src/locomotion_robot_pkg/msg/sub_move.msg" NAME_WE)
 add_dependencies(locomotion_robot_pkg_generate_messages_eus _locomotion_robot_pkg_generate_messages_check_deps_${_filename})
+get_filename_component(_filename "/home/robotAutonomoUNLP/locomotion_ws/src/locomotion_robot_pkg/msg/sync_type.msg" NAME_WE)
+add_dependencies(locomotion_robot_pkg_generate_messages_eus _locomotion_robot_pkg_generate_messages_check_deps_${_filename})
+get_filename_component(_filename "/home/robotAutonomoUNLP/locomotion_ws/src/locomotion_robot_pkg/msg/motor_speeds.msg" NAME_WE)
+add_dependencies(locomotion_robot_pkg_generate_messages_eus _locomotion_robot_pkg_generate_messages_check_deps_${_filename})
 
 # target for backward compatibility
 add_custom_target(locomotion_robot_pkg_geneus)
@@ -97,7 +139,19 @@ list(APPEND ${PROJECT_NAME}_EXPORTED_TARGETS locomotion_robot_pkg_generate_messa
 _generate_msg_lisp(locomotion_robot_pkg
   "/home/robotAutonomoUNLP/locomotion_ws/src/locomotion_robot_pkg/msg/sub_move.msg"
   "${MSG_I_FLAGS}"
-  "/opt/ros/noetic/share/std_msgs/cmake/../msg/String.msg;/opt/ros/noetic/share/std_msgs/cmake/../msg/Int32.msg"
+  "/opt/ros/noetic/share/std_msgs/cmake/../msg/Int32.msg;/opt/ros/noetic/share/std_msgs/cmake/../msg/String.msg"
+  ${CATKIN_DEVEL_PREFIX}/${genlisp_INSTALL_DIR}/locomotion_robot_pkg
+)
+_generate_msg_lisp(locomotion_robot_pkg
+  "/home/robotAutonomoUNLP/locomotion_ws/src/locomotion_robot_pkg/msg/sync_type.msg"
+  "${MSG_I_FLAGS}"
+  "/opt/ros/noetic/share/std_msgs/cmake/../msg/UInt8.msg;/opt/ros/noetic/share/std_msgs/cmake/../msg/Float32.msg"
+  ${CATKIN_DEVEL_PREFIX}/${genlisp_INSTALL_DIR}/locomotion_robot_pkg
+)
+_generate_msg_lisp(locomotion_robot_pkg
+  "/home/robotAutonomoUNLP/locomotion_ws/src/locomotion_robot_pkg/msg/motor_speeds.msg"
+  "${MSG_I_FLAGS}"
+  "/opt/ros/noetic/share/std_msgs/cmake/../msg/Float32.msg"
   ${CATKIN_DEVEL_PREFIX}/${genlisp_INSTALL_DIR}/locomotion_robot_pkg
 )
 
@@ -117,6 +171,10 @@ add_dependencies(locomotion_robot_pkg_generate_messages locomotion_robot_pkg_gen
 # add dependencies to all check dependencies targets
 get_filename_component(_filename "/home/robotAutonomoUNLP/locomotion_ws/src/locomotion_robot_pkg/msg/sub_move.msg" NAME_WE)
 add_dependencies(locomotion_robot_pkg_generate_messages_lisp _locomotion_robot_pkg_generate_messages_check_deps_${_filename})
+get_filename_component(_filename "/home/robotAutonomoUNLP/locomotion_ws/src/locomotion_robot_pkg/msg/sync_type.msg" NAME_WE)
+add_dependencies(locomotion_robot_pkg_generate_messages_lisp _locomotion_robot_pkg_generate_messages_check_deps_${_filename})
+get_filename_component(_filename "/home/robotAutonomoUNLP/locomotion_ws/src/locomotion_robot_pkg/msg/motor_speeds.msg" NAME_WE)
+add_dependencies(locomotion_robot_pkg_generate_messages_lisp _locomotion_robot_pkg_generate_messages_check_deps_${_filename})
 
 # target for backward compatibility
 add_custom_target(locomotion_robot_pkg_genlisp)
@@ -130,7 +188,19 @@ list(APPEND ${PROJECT_NAME}_EXPORTED_TARGETS locomotion_robot_pkg_generate_messa
 _generate_msg_nodejs(locomotion_robot_pkg
   "/home/robotAutonomoUNLP/locomotion_ws/src/locomotion_robot_pkg/msg/sub_move.msg"
   "${MSG_I_FLAGS}"
-  "/opt/ros/noetic/share/std_msgs/cmake/../msg/String.msg;/opt/ros/noetic/share/std_msgs/cmake/../msg/Int32.msg"
+  "/opt/ros/noetic/share/std_msgs/cmake/../msg/Int32.msg;/opt/ros/noetic/share/std_msgs/cmake/../msg/String.msg"
+  ${CATKIN_DEVEL_PREFIX}/${gennodejs_INSTALL_DIR}/locomotion_robot_pkg
+)
+_generate_msg_nodejs(locomotion_robot_pkg
+  "/home/robotAutonomoUNLP/locomotion_ws/src/locomotion_robot_pkg/msg/sync_type.msg"
+  "${MSG_I_FLAGS}"
+  "/opt/ros/noetic/share/std_msgs/cmake/../msg/UInt8.msg;/opt/ros/noetic/share/std_msgs/cmake/../msg/Float32.msg"
+  ${CATKIN_DEVEL_PREFIX}/${gennodejs_INSTALL_DIR}/locomotion_robot_pkg
+)
+_generate_msg_nodejs(locomotion_robot_pkg
+  "/home/robotAutonomoUNLP/locomotion_ws/src/locomotion_robot_pkg/msg/motor_speeds.msg"
+  "${MSG_I_FLAGS}"
+  "/opt/ros/noetic/share/std_msgs/cmake/../msg/Float32.msg"
   ${CATKIN_DEVEL_PREFIX}/${gennodejs_INSTALL_DIR}/locomotion_robot_pkg
 )
 
@@ -150,6 +220,10 @@ add_dependencies(locomotion_robot_pkg_generate_messages locomotion_robot_pkg_gen
 # add dependencies to all check dependencies targets
 get_filename_component(_filename "/home/robotAutonomoUNLP/locomotion_ws/src/locomotion_robot_pkg/msg/sub_move.msg" NAME_WE)
 add_dependencies(locomotion_robot_pkg_generate_messages_nodejs _locomotion_robot_pkg_generate_messages_check_deps_${_filename})
+get_filename_component(_filename "/home/robotAutonomoUNLP/locomotion_ws/src/locomotion_robot_pkg/msg/sync_type.msg" NAME_WE)
+add_dependencies(locomotion_robot_pkg_generate_messages_nodejs _locomotion_robot_pkg_generate_messages_check_deps_${_filename})
+get_filename_component(_filename "/home/robotAutonomoUNLP/locomotion_ws/src/locomotion_robot_pkg/msg/motor_speeds.msg" NAME_WE)
+add_dependencies(locomotion_robot_pkg_generate_messages_nodejs _locomotion_robot_pkg_generate_messages_check_deps_${_filename})
 
 # target for backward compatibility
 add_custom_target(locomotion_robot_pkg_gennodejs)
@@ -163,7 +237,19 @@ list(APPEND ${PROJECT_NAME}_EXPORTED_TARGETS locomotion_robot_pkg_generate_messa
 _generate_msg_py(locomotion_robot_pkg
   "/home/robotAutonomoUNLP/locomotion_ws/src/locomotion_robot_pkg/msg/sub_move.msg"
   "${MSG_I_FLAGS}"
-  "/opt/ros/noetic/share/std_msgs/cmake/../msg/String.msg;/opt/ros/noetic/share/std_msgs/cmake/../msg/Int32.msg"
+  "/opt/ros/noetic/share/std_msgs/cmake/../msg/Int32.msg;/opt/ros/noetic/share/std_msgs/cmake/../msg/String.msg"
+  ${CATKIN_DEVEL_PREFIX}/${genpy_INSTALL_DIR}/locomotion_robot_pkg
+)
+_generate_msg_py(locomotion_robot_pkg
+  "/home/robotAutonomoUNLP/locomotion_ws/src/locomotion_robot_pkg/msg/sync_type.msg"
+  "${MSG_I_FLAGS}"
+  "/opt/ros/noetic/share/std_msgs/cmake/../msg/UInt8.msg;/opt/ros/noetic/share/std_msgs/cmake/../msg/Float32.msg"
+  ${CATKIN_DEVEL_PREFIX}/${genpy_INSTALL_DIR}/locomotion_robot_pkg
+)
+_generate_msg_py(locomotion_robot_pkg
+  "/home/robotAutonomoUNLP/locomotion_ws/src/locomotion_robot_pkg/msg/motor_speeds.msg"
+  "${MSG_I_FLAGS}"
+  "/opt/ros/noetic/share/std_msgs/cmake/../msg/Float32.msg"
   ${CATKIN_DEVEL_PREFIX}/${genpy_INSTALL_DIR}/locomotion_robot_pkg
 )
 
@@ -182,6 +268,10 @@ add_dependencies(locomotion_robot_pkg_generate_messages locomotion_robot_pkg_gen
 
 # add dependencies to all check dependencies targets
 get_filename_component(_filename "/home/robotAutonomoUNLP/locomotion_ws/src/locomotion_robot_pkg/msg/sub_move.msg" NAME_WE)
+add_dependencies(locomotion_robot_pkg_generate_messages_py _locomotion_robot_pkg_generate_messages_check_deps_${_filename})
+get_filename_component(_filename "/home/robotAutonomoUNLP/locomotion_ws/src/locomotion_robot_pkg/msg/sync_type.msg" NAME_WE)
+add_dependencies(locomotion_robot_pkg_generate_messages_py _locomotion_robot_pkg_generate_messages_check_deps_${_filename})
+get_filename_component(_filename "/home/robotAutonomoUNLP/locomotion_ws/src/locomotion_robot_pkg/msg/motor_speeds.msg" NAME_WE)
 add_dependencies(locomotion_robot_pkg_generate_messages_py _locomotion_robot_pkg_generate_messages_check_deps_${_filename})
 
 # target for backward compatibility

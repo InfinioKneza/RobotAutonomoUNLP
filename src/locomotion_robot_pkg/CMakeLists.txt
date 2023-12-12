@@ -53,6 +53,8 @@ roslaunch_add_file_check(launch)
 add_message_files(
   FILES
   sub_move.msg
+  sync_type.msg
+  motor_speeds.msg
 )
 
 ## Generate services in the 'srv' folder

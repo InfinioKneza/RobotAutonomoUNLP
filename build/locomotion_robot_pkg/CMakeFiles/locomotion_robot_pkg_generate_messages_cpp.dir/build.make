@@ -54,18 +54,37 @@ CMAKE_BINARY_DIR = /home/robotAutonomoUNLP/locomotion_ws/build
 include locomotion_robot_pkg/CMakeFiles/locomotion_robot_pkg_generate_messages_cpp.dir/progress.make
 
 locomotion_robot_pkg/CMakeFiles/locomotion_robot_pkg_generate_messages_cpp: /home/robotAutonomoUNLP/locomotion_ws/devel/include/locomotion_robot_pkg/sub_move.h
+locomotion_robot_pkg/CMakeFiles/locomotion_robot_pkg_generate_messages_cpp: /home/robotAutonomoUNLP/locomotion_ws/devel/include/locomotion_robot_pkg/sync_type.h
+locomotion_robot_pkg/CMakeFiles/locomotion_robot_pkg_generate_messages_cpp: /home/robotAutonomoUNLP/locomotion_ws/devel/include/locomotion_robot_pkg/motor_speeds.h
 
 
 /home/robotAutonomoUNLP/locomotion_ws/devel/include/locomotion_robot_pkg/sub_move.h: /opt/ros/noetic/lib/gencpp/gen_cpp.py
 /home/robotAutonomoUNLP/locomotion_ws/devel/include/locomotion_robot_pkg/sub_move.h: /home/robotAutonomoUNLP/locomotion_ws/src/locomotion_robot_pkg/msg/sub_move.msg
-/home/robotAutonomoUNLP/locomotion_ws/devel/include/locomotion_robot_pkg/sub_move.h: /opt/ros/noetic/share/std_msgs/msg/String.msg
 /home/robotAutonomoUNLP/locomotion_ws/devel/include/locomotion_robot_pkg/sub_move.h: /opt/ros/noetic/share/std_msgs/msg/Int32.msg
+/home/robotAutonomoUNLP/locomotion_ws/devel/include/locomotion_robot_pkg/sub_move.h: /opt/ros/noetic/share/std_msgs/msg/String.msg
 /home/robotAutonomoUNLP/locomotion_ws/devel/include/locomotion_robot_pkg/sub_move.h: /opt/ros/noetic/share/gencpp/msg.h.template
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/robotAutonomoUNLP/locomotion_ws/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Generating C++ code from locomotion_robot_pkg/sub_move.msg"
 	cd /home/robotAutonomoUNLP/locomotion_ws/src/locomotion_robot_pkg && /home/robotAutonomoUNLP/locomotion_ws/build/catkin_generated/env_cached.sh /usr/bin/python3 /opt/ros/noetic/share/gencpp/cmake/../../../lib/gencpp/gen_cpp.py /home/robotAutonomoUNLP/locomotion_ws/src/locomotion_robot_pkg/msg/sub_move.msg -Ilocomotion_robot_pkg:/home/robotAutonomoUNLP/locomotion_ws/src/locomotion_robot_pkg/msg -Istd_msgs:/opt/ros/noetic/share/std_msgs/cmake/../msg -p locomotion_robot_pkg -o /home/robotAutonomoUNLP/locomotion_ws/devel/include/locomotion_robot_pkg -e /opt/ros/noetic/share/gencpp/cmake/..
 
+/home/robotAutonomoUNLP/locomotion_ws/devel/include/locomotion_robot_pkg/sync_type.h: /opt/ros/noetic/lib/gencpp/gen_cpp.py
+/home/robotAutonomoUNLP/locomotion_ws/devel/include/locomotion_robot_pkg/sync_type.h: /home/robotAutonomoUNLP/locomotion_ws/src/locomotion_robot_pkg/msg/sync_type.msg
+/home/robotAutonomoUNLP/locomotion_ws/devel/include/locomotion_robot_pkg/sync_type.h: /opt/ros/noetic/share/std_msgs/msg/UInt8.msg
+/home/robotAutonomoUNLP/locomotion_ws/devel/include/locomotion_robot_pkg/sync_type.h: /opt/ros/noetic/share/std_msgs/msg/Float32.msg
+/home/robotAutonomoUNLP/locomotion_ws/devel/include/locomotion_robot_pkg/sync_type.h: /opt/ros/noetic/share/gencpp/msg.h.template
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/robotAutonomoUNLP/locomotion_ws/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Generating C++ code from locomotion_robot_pkg/sync_type.msg"
+	cd /home/robotAutonomoUNLP/locomotion_ws/src/locomotion_robot_pkg && /home/robotAutonomoUNLP/locomotion_ws/build/catkin_generated/env_cached.sh /usr/bin/python3 /opt/ros/noetic/share/gencpp/cmake/../../../lib/gencpp/gen_cpp.py /home/robotAutonomoUNLP/locomotion_ws/src/locomotion_robot_pkg/msg/sync_type.msg -Ilocomotion_robot_pkg:/home/robotAutonomoUNLP/locomotion_ws/src/locomotion_robot_pkg/msg -Istd_msgs:/opt/ros/noetic/share/std_msgs/cmake/../msg -p locomotion_robot_pkg -o /home/robotAutonomoUNLP/locomotion_ws/devel/include/locomotion_robot_pkg -e /opt/ros/noetic/share/gencpp/cmake/..
+
+/home/robotAutonomoUNLP/locomotion_ws/devel/include/locomotion_robot_pkg/motor_speeds.h: /opt/ros/noetic/lib/gencpp/gen_cpp.py
+/home/robotAutonomoUNLP/locomotion_ws/devel/include/locomotion_robot_pkg/motor_speeds.h: /home/robotAutonomoUNLP/locomotion_ws/src/locomotion_robot_pkg/msg/motor_speeds.msg
+/home/robotAutonomoUNLP/locomotion_ws/devel/include/locomotion_robot_pkg/motor_speeds.h: /opt/ros/noetic/share/std_msgs/msg/Float32.msg
+/home/robotAutonomoUNLP/locomotion_ws/devel/include/locomotion_robot_pkg/motor_speeds.h: /opt/ros/noetic/share/gencpp/msg.h.template
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/robotAutonomoUNLP/locomotion_ws/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Generating C++ code from locomotion_robot_pkg/motor_speeds.msg"
+	cd /home/robotAutonomoUNLP/locomotion_ws/src/locomotion_robot_pkg && /home/robotAutonomoUNLP/locomotion_ws/build/catkin_generated/env_cached.sh /usr/bin/python3 /opt/ros/noetic/share/gencpp/cmake/../../../lib/gencpp/gen_cpp.py /home/robotAutonomoUNLP/locomotion_ws/src/locomotion_robot_pkg/msg/motor_speeds.msg -Ilocomotion_robot_pkg:/home/robotAutonomoUNLP/locomotion_ws/src/locomotion_robot_pkg/msg -Istd_msgs:/opt/ros/noetic/share/std_msgs/cmake/../msg -p locomotion_robot_pkg -o /home/robotAutonomoUNLP/locomotion_ws/devel/include/locomotion_robot_pkg -e /opt/ros/noetic/share/gencpp/cmake/..
+
 locomotion_robot_pkg_generate_messages_cpp: locomotion_robot_pkg/CMakeFiles/locomotion_robot_pkg_generate_messages_cpp
 locomotion_robot_pkg_generate_messages_cpp: /home/robotAutonomoUNLP/locomotion_ws/devel/include/locomotion_robot_pkg/sub_move.h
+locomotion_robot_pkg_generate_messages_cpp: /home/robotAutonomoUNLP/locomotion_ws/devel/include/locomotion_robot_pkg/sync_type.h
+locomotion_robot_pkg_generate_messages_cpp: /home/robotAutonomoUNLP/locomotion_ws/devel/include/locomotion_robot_pkg/motor_speeds.h
 locomotion_robot_pkg_generate_messages_cpp: locomotion_robot_pkg/CMakeFiles/locomotion_robot_pkg_generate_messages_cpp.dir/build.make
 
 .PHONY : locomotion_robot_pkg_generate_messages_cpp
