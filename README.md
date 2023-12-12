@@ -4,11 +4,6 @@ Initial project of an autonomous robot led by a group of students from the Real-
 ## Overview
 This project consists of a tri-wheeled robot that uses de ROS framwork to process scripts and move making geometric figures with its path, also implementing a control system so the movement is smooth and syncronized.
 
-## Table of Contents
-
-- [Getting Started](#getting-started)
-
-
 ## Getting Started
 
 - [Connection Instructions](#connection-instructions)
