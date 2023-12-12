@@ -62,7 +62,6 @@ def send_ack():
 # Callback function triggered when the next primitive needs to be executed
 def next_primitive(data):
     global _continue
-    print("Next primitive!")
     _continue = True
 
 # Function to decode and execute the command and argument received
@@ -86,7 +85,6 @@ def decoder(command, argument):
         if func_name in globals() and callable(globals()[func_name]):
             func_to_call = globals()[func_name]
             func_to_call(func_arg)  # Execute the movement primitive
-            print("Primitive sent")
         else:
             print(f"Function '{func_name}' not found or not callable.")
             return
