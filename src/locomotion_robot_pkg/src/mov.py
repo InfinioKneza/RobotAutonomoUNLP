@@ -3,18 +3,20 @@ import rospy
 import math
 import RPi.GPIO as GPIO
 from std_msgs.msg import Int64, Bool, Empty
-from locomotion_robot_pkg.msg import sub_move
+from locomotion_robot_pkg.msg import sub_move, sync_type, motor_speeds
 
 # Initialize variables
 go_to_next_sm = False # Flag to indicate if we are going to the next submovemnt
-SPEED = 50  # Speed of the motors
+motor_a_speed = 50
+motor_b_speed = 50
 WHEEL_DIAMETER = 13.5   # Diameter of the wheels
 ROBOT_DIAMETER = 27  # Diameter of the robot
 PULSES_PER_FULL_REVOLUTION = 2200  # Number of pulses per full revolution
+EXTRA_ANGLE = 45
 
+last_sync_type = -1  # Saves the last sync_type message sent to avoid congestion
 encoder_a_confirmation = False
 encoder_b_confirmation = False
-EXTRA_ANGLE = 45
 
 # Calculate pulses based on distance
 def calculate_pulses_by_distance(distance):
@@ -26,50 +28,73 @@ def calculate_pulses_by_angle(angle):
     distance = (ROBOT_DIAMETER * math.pi) * angle/360
     return calculate_pulses_by_distance(distance)
 
+def sync_movement(_sync_type):
+    global pub_sync, last_sync_type
+
+    # Only if the sync_type differs is the message sent
+    if last_sync_type ==_sync_type:
+        return
+    
+    # If sync_type is 0 in regular syncronization (not weighted), use whith regular primitives (FRLR)
+    if _sync_type == 0:
+        sync_msg = sync_type()
+        sync_msg.sync_type.data = 0
+        sync_msg.factor.data = 0
+        sync_msg.dominant_motor.data = 0
+        pub_sync.publish(sync_msg)
+        last_sync_type = _sync_type
+    elif _sync_type == 1:
+        pass  # When the sync_type is weighted, use for curve movement
+
+
 # Move functions
 def forward(args):
-    global SPEED, pub_pulses_to_a, pub_pulses_to_b
+    global pub_pulses_to_a, pub_pulses_to_b, motor_a_speed, motor_b_speed
 
     pulses = calculate_pulses_by_distance(args[0])
 
+    sync_movement(0)
     pub_pulses_to_a.publish(pulses)
     pub_pulses_to_b.publish(pulses)
 
-    runMotor(0, SPEED, 0)
-    runMotor(1, SPEED, 0)
+    runMotor(0, motor_a_speed, 0)
+    runMotor(1, motor_b_speed, 0)
 
 def reverse(args):
-    global SPEED, pub_pulses_to_a, pub_pulses_to_b
+    global pub_pulses_to_a, pub_pulses_to_b, motor_a_speed, motor_b_speed
 
     pulses = calculate_pulses_by_distance(args[0])
 
+    sync_movement(0)
     pub_pulses_to_a.publish(-pulses)  # Negative because we are going backwards
     pub_pulses_to_b.publish(-pulses)
 
-    runMotor(0, SPEED, 1)
-    runMotor(1, SPEED, 1)
+    runMotor(0, motor_a_speed, 1)
+    runMotor(1, motor_b_speed, 1)
 
 def left(args):
-    global SPEED, pub_pulses_to_a, pub_pulses_to_b
+    global pub_pulses_to_a, pub_pulses_to_b, motor_a_speed, motor_b_speed
 
     pulses = calculate_pulses_by_angle(args[1])
 
+    sync_movement(0)
     pub_pulses_to_a.publish(pulses)
     pub_pulses_to_b.publish(-pulses)
 
-    runMotor(0, SPEED, 0)
-    runMotor(1, SPEED, 1)
+    runMotor(0, motor_a_speed, 0)
+    runMotor(1, motor_b_speed, 1)
 
 def right(args):
-    global SPEED, pub_pulses_to_a, pub_pulses_to_b
+    global pub_pulses_to_a, pub_pulses_to_b, motor_a_speed, motor_b_speed
 
     pulses = calculate_pulses_by_angle(args[1])
 
+    sync_movement(0)
     pub_pulses_to_a.publish(-pulses)
     pub_pulses_to_b.publish(pulses)
 
-    runMotor(0, SPEED, 1)
-    runMotor(1, SPEED, 0)
+    runMotor(0, motor_a_speed, 1)
+    runMotor(1, motor_b_speed, 0)
 
 # Stop motor function
 def motorStop():
@@ -95,6 +120,18 @@ def runMotor(motor, spd, direction):
         GPIO.output(13, in2)
         pwmb.start(spd)
 
+
+def update_speeds_cb(motor_speeds_msg):
+    global motor_a_speed, motor_b_speed
+
+    motor_a_speed = float(motor_speeds_msg.vel_a.data)  # Get motor A speed
+    motor_b_speed = float(motor_speeds_msg.vel_b.data)  # Get motor B speed
+
+    # Updates motors speed
+    pwma.start(motor_a_speed)
+    pwmb.start(motor_b_speed)
+    print("Speed A: {:.2f}".format(motor_a_speed))
+    print("Speed B: {:.2f}".format(motor_b_speed))
 
 # Confirm encoder A
 def conf_encoder_a(data):
@@ -162,12 +199,16 @@ if __name__ == "__main__":
     pub_pulses_to_a = rospy.Publisher("wait_pulses_a", Int64, queue_size=10)
     pub_pulses_to_b = rospy.Publisher("wait_pulses_b", Int64, queue_size=10)
     pub_next = rospy.Publisher("next_sm", Empty, queue_size=10)
+    pub_sync = rospy.Publisher("sync_update", sync_type, queue_size=10)
 
     # Add subscribers for encoder A and B
     rospy.Subscriber("ready_a", Bool, conf_encoder_a)
     rospy.Subscriber("ready_b", Bool, conf_encoder_b)
     # Add subscriber for sub move
     rospy.Subscriber("sub_move", sub_move, receive_primitive)
+    # Add subscriber for
+    rospy.Subscriber("speed_update", motor_speeds, update_speeds_cb)
+
     # Initialize node
     rospy.init_node('mov')
 
