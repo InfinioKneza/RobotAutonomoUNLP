@@ -68,7 +68,7 @@ To start the robot please run the command. To reduce conflicts we recommend to w
   $ roslaunch locomotion_robot_pkg start.launch
 ```
 
-### ROS Run
+#### ROS Run
 <a name="ros-run"></a>
 
 ```
@@ -81,7 +81,7 @@ To start the robot please run the command. To reduce conflicts we recommend to w
 | `line {length in cm}`         | Moves forward the ammount of cm specifie                  |
 | `square {side lenght in cm}`  | Makes a square of side specified in cm as parameter       |
 
-### Emergency
+#### Emergency
 <a name="ros-emergency"></a>
 
 ```
