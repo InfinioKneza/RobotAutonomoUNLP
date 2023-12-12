@@ -1,6 +1,6 @@
 set(_CATKIN_CURRENT_PACKAGE "locomotion_robot_pkg")
 set(locomotion_robot_pkg_VERSION "0.0.0")
-set(locomotion_robot_pkg_MAINTAINER "robotAutonomoUNLP <robotAutonomoUNLP@todo.todo>")
+set(locomotion_robot_pkg_MAINTAINER "Tadeo Deluca <tadeo.deluca2002@gmail.com>")
 set(locomotion_robot_pkg_PACKAGE_FORMAT "2")
 set(locomotion_robot_pkg_BUILD_DEPENDS "rospy" "std_msgs" "message_generation" "roslaunch")
 set(locomotion_robot_pkg_BUILD_EXPORT_DEPENDS "rospy" "std_msgs")

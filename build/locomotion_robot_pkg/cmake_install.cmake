@@ -38,7 +38,11 @@ if(NOT DEFINED CMAKE_CROSSCOMPILING)
 endif()
 
 if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_COMPONENT)
-  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/locomotion_robot_pkg/msg" TYPE FILE FILES "/home/robotAutonomoUNLP/locomotion_ws/src/locomotion_robot_pkg/msg/sub_move.msg")
+  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/locomotion_robot_pkg/msg" TYPE FILE FILES
+    "/home/robotAutonomoUNLP/locomotion_ws/src/locomotion_robot_pkg/msg/sub_move.msg"
+    "/home/robotAutonomoUNLP/locomotion_ws/src/locomotion_robot_pkg/msg/sync_type.msg"
+    "/home/robotAutonomoUNLP/locomotion_ws/src/locomotion_robot_pkg/msg/motor_speeds.msg"
+    )
 endif()
 
 if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_COMPONENT)

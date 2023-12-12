@@ -1,115 +1,157 @@
 #!/usr/bin/env python3
-import sys
 import rospy
 import math
 import RPi.GPIO as GPIO
 from std_msgs.msg import Int64, Bool, Empty
-from locomotion_robot_pkg.msg import sub_move
+from locomotion_robot_pkg.msg import sub_move, sync_type, motor_speeds
 
-go_to_next_sm = False
-SPEED = 50
-WHEEL_DIAMETER = 13.5
-ROBOT_DIAMETER = 27
+# Initialize variables
+go_to_next_sm = False # Flag to indicate if we are going to the next submovemnt
+motor_a_speed = 50
+motor_b_speed = 50
+WHEEL_DIAMETER = 13.5   # Diameter of the wheels
+ROBOT_DIAMETER = 27  # Diameter of the robot
+PULSES_PER_FULL_REVOLUTION = 2200  # Number of pulses per full revolution
+EXTRA_ANGLE = 45
+
+last_sync_type = -1  # Saves the last sync_type message sent to avoid congestion
 encoder_a_confirmation = False
 encoder_b_confirmation = False
 
-## Functions ##
+# Calculate pulses based on distance
 def calculate_pulses_by_distance(distance):
-    return int((float(distance) * 2200) / (math.pi * WHEEL_DIAMETER))
+    return int((float(distance) * PULSES_PER_FULL_REVOLUTION) / (math.pi * WHEEL_DIAMETER))
 
+# Calculate pulses based on angle
 def calculate_pulses_by_angle(angle):
+    angle += EXTRA_ANGLE
     distance = (ROBOT_DIAMETER * math.pi) * angle/360
     return calculate_pulses_by_distance(distance)
 
+def sync_movement(_sync_type):
+    global pub_sync, last_sync_type
+
+    # Only if the sync_type differs is the message sent
+    if last_sync_type ==_sync_type:
+        return
+    
+    # If sync_type is 0 in regular syncronization (not weighted), use whith regular primitives (FRLR)
+    if _sync_type == 0:
+        sync_msg = sync_type()
+        sync_msg.sync_type.data = 0
+        sync_msg.factor.data = 0
+        sync_msg.dominant_motor.data = 0
+        pub_sync.publish(sync_msg)
+        last_sync_type = _sync_type
+    elif _sync_type == 1:
+        pass  # When the sync_type is weighted, use for curve movement
+
+
+# Move functions
 def forward(args):
-    global SPEED, pub_pulses_to_a, pub_pulses_to_b
+    global pub_pulses_to_a, pub_pulses_to_b, motor_a_speed, motor_b_speed
 
     pulses = calculate_pulses_by_distance(args[0])
 
+    sync_movement(0)
     pub_pulses_to_a.publish(pulses)
     pub_pulses_to_b.publish(pulses)
 
-    runMotor(0, SPEED, 0)
-    runMotor(1, SPEED, 0)
+    runMotor(0, motor_a_speed, 0)
+    runMotor(1, motor_b_speed, 0)
 
 def reverse(args):
-    global SPEED, pub_pulses_to_a, pub_pulses_to_b
+    global pub_pulses_to_a, pub_pulses_to_b, motor_a_speed, motor_b_speed
 
     pulses = calculate_pulses_by_distance(args[0])
 
-    pub_pulses_to_a.publish(-pulses)
+    sync_movement(0)
+    pub_pulses_to_a.publish(-pulses)  # Negative because we are going backwards
     pub_pulses_to_b.publish(-pulses)
 
-    runMotor(0, SPEED, 1)
-    runMotor(1, SPEED, 1)
+    runMotor(0, motor_a_speed, 1)
+    runMotor(1, motor_b_speed, 1)
 
 def left(args):
-    global SPEED, pub_pulses_to_a, pub_pulses_to_b
+    global pub_pulses_to_a, pub_pulses_to_b, motor_a_speed, motor_b_speed
 
     pulses = calculate_pulses_by_angle(args[1])
 
+    sync_movement(0)
     pub_pulses_to_a.publish(pulses)
     pub_pulses_to_b.publish(-pulses)
 
-    runMotor(0, SPEED, 0)
-    runMotor(1, SPEED, 1)
+    runMotor(0, motor_a_speed, 0)
+    runMotor(1, motor_b_speed, 1)
 
 def right(args):
-    global SPEED, pub_pulses_to_a, pub_pulses_to_b
+    global pub_pulses_to_a, pub_pulses_to_b, motor_a_speed, motor_b_speed
 
     pulses = calculate_pulses_by_angle(args[1])
 
+    sync_movement(0)
     pub_pulses_to_a.publish(-pulses)
     pub_pulses_to_b.publish(pulses)
 
-    runMotor(0, SPEED, 1)
-    runMotor(1, SPEED, 0)
+    runMotor(0, motor_a_speed, 1)
+    runMotor(1, motor_b_speed, 0)
 
+# Stop motor function
 def motorStop():
     GPIO.output(22, GPIO.LOW)
 
+# Run motor function
 def runMotor(motor, spd, direction):
     GPIO.output(22, GPIO.HIGH)
     in1 = GPIO.HIGH
     in2 = GPIO.LOW
 
-    if(direction == 1):
+    # Reverse direction for going backwards
+    if direction == 1:
         in1 = GPIO.LOW
         in2 = GPIO.HIGH
 
-    if(motor == 0):
+    if motor == 0:
         GPIO.output(16, in1)
         GPIO.output(18, in2)
         pwma.start(spd)
-    elif(motor == 1):
+    elif motor == 1:
         GPIO.output(15, in1)
         GPIO.output(13, in2)
         pwmb.start(spd)
-    
-def check_confirmations():
-    global encoder_a_confirmation, encoder_b_confirmation
-
-    return encoder_a_confirmation and encoder_b_confirmation
 
 
+def update_speeds_cb(motor_speeds_msg):
+    global motor_a_speed, motor_b_speed
+
+    motor_a_speed = float(motor_speeds_msg.vel_a.data)  # Get motor A speed
+    motor_b_speed = float(motor_speeds_msg.vel_b.data)  # Get motor B speed
+
+    # Updates motors speed
+    pwma.start(motor_a_speed)
+    pwmb.start(motor_b_speed)
+    print("Speed A: {:.2f}".format(motor_a_speed))
+    print("Speed B: {:.2f}".format(motor_b_speed))
+
+# Confirm encoder A
 def conf_encoder_a(data):
     global go_to_next_sm, encoder_a_confirmation, encoder_b_confirmation
 
     encoder_a_confirmation = True
-    go_to_next_sm = check_confirmations()
 
-    if go_to_next_sm:
+    if encoder_b_confirmation:
         next_primitive()
 
+# Confirm encoder B
 def conf_encoder_b(data):
     global go_to_next_sm, encoder_a_confirmation, encoder_b_confirmation
-    
-    encoder_b_confirmation = True
-    go_to_next_sm = check_confirmations()
 
-    if go_to_next_sm:
+    encoder_b_confirmation = True
+
+    if encoder_a_confirmation:
         next_primitive()
 
+# Move to next primitive
 def next_primitive():
     global encoder_a_confirmation, encoder_b_confirmation, pub_next
 
@@ -118,13 +160,14 @@ def next_primitive():
     motorStop()
     pub_next.publish()
 
-
+# Receive primitive to execute
 def receive_primitive(move):
-    sub_move = str(move.primitive.data)
-    arguments = [int(move.distance.data), int(move.angle.data)]
+    sub_move = str(move.primitive.data)  # Get sub move
+    arguments = [int(move.distance.data), int(move.angle.data)]  # Get distance and angle
 
     print("Sub move: " + sub_move)
 
+    # Check if sub move is valid
     if sub_move == "ack":
         return
     else:
@@ -132,9 +175,9 @@ def receive_primitive(move):
             func_to_call = globals()[sub_move]
             func_to_call(arguments)
 
-
+# Initialize GPIO
 if __name__ == "__main__":
-    GPIO.setmode(GPIO.BOARD)      # Set GPIO mode to BCM
+    GPIO.setmode(GPIO.BOARD)
     GPIO.setwarnings(False)
 
     # PWM Frequency
@@ -149,16 +192,24 @@ if __name__ == "__main__":
     GPIO.setup(13, GPIO.OUT)    # BIN2
     GPIO.setup(11, GPIO.OUT)    # PWMB
 
-    pwma = GPIO.PWM(12, pwmFreq)    # pin 18 to PWM  
-    pwmb = GPIO.PWM(11, pwmFreq)    # pin 13 to PWM
+    pwma = GPIO.PWM(12, pwmFreq)  # pin 12 to PWM  
+    pwmb = GPIO.PWM(11, pwmFreq)  # pin 11 to PWM
 
+    # ROS Publishers and Subscribers initialization
     pub_pulses_to_a = rospy.Publisher("wait_pulses_a", Int64, queue_size=10)
     pub_pulses_to_b = rospy.Publisher("wait_pulses_b", Int64, queue_size=10)
     pub_next = rospy.Publisher("next_sm", Empty, queue_size=10)
+    pub_sync = rospy.Publisher("sync_update", sync_type, queue_size=10)
+
+    # Add subscribers for encoder A and B
     rospy.Subscriber("ready_a", Bool, conf_encoder_a)
     rospy.Subscriber("ready_b", Bool, conf_encoder_b)
+    # Add subscriber for sub move
     rospy.Subscriber("sub_move", sub_move, receive_primitive)
+    # Add subscriber for
+    rospy.Subscriber("speed_update", motor_speeds, update_speeds_cb)
+
+    # Initialize node
     rospy.init_node('mov')
 
     rospy.spin()
-

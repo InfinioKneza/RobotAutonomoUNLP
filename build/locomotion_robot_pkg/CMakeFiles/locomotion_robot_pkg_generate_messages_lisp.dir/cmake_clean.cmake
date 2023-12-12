@@ -1,5 +1,7 @@
 file(REMOVE_RECURSE
+  "/home/robotAutonomoUNLP/locomotion_ws/devel/share/common-lisp/ros/locomotion_robot_pkg/msg/motor_speeds.lisp"
   "/home/robotAutonomoUNLP/locomotion_ws/devel/share/common-lisp/ros/locomotion_robot_pkg/msg/sub_move.lisp"
+  "/home/robotAutonomoUNLP/locomotion_ws/devel/share/common-lisp/ros/locomotion_robot_pkg/msg/sync_type.lisp"
   "CMakeFiles/locomotion_robot_pkg_generate_messages_lisp"
 )
 

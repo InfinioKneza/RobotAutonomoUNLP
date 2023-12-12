@@ -54,17 +54,34 @@ CMAKE_BINARY_DIR = /home/robotAutonomoUNLP/locomotion_ws/build
 include locomotion_robot_pkg/CMakeFiles/locomotion_robot_pkg_generate_messages_lisp.dir/progress.make
 
 locomotion_robot_pkg/CMakeFiles/locomotion_robot_pkg_generate_messages_lisp: /home/robotAutonomoUNLP/locomotion_ws/devel/share/common-lisp/ros/locomotion_robot_pkg/msg/sub_move.lisp
+locomotion_robot_pkg/CMakeFiles/locomotion_robot_pkg_generate_messages_lisp: /home/robotAutonomoUNLP/locomotion_ws/devel/share/common-lisp/ros/locomotion_robot_pkg/msg/sync_type.lisp
+locomotion_robot_pkg/CMakeFiles/locomotion_robot_pkg_generate_messages_lisp: /home/robotAutonomoUNLP/locomotion_ws/devel/share/common-lisp/ros/locomotion_robot_pkg/msg/motor_speeds.lisp
 
 
 /home/robotAutonomoUNLP/locomotion_ws/devel/share/common-lisp/ros/locomotion_robot_pkg/msg/sub_move.lisp: /opt/ros/noetic/lib/genlisp/gen_lisp.py
 /home/robotAutonomoUNLP/locomotion_ws/devel/share/common-lisp/ros/locomotion_robot_pkg/msg/sub_move.lisp: /home/robotAutonomoUNLP/locomotion_ws/src/locomotion_robot_pkg/msg/sub_move.msg
-/home/robotAutonomoUNLP/locomotion_ws/devel/share/common-lisp/ros/locomotion_robot_pkg/msg/sub_move.lisp: /opt/ros/noetic/share/std_msgs/msg/String.msg
 /home/robotAutonomoUNLP/locomotion_ws/devel/share/common-lisp/ros/locomotion_robot_pkg/msg/sub_move.lisp: /opt/ros/noetic/share/std_msgs/msg/Int32.msg
+/home/robotAutonomoUNLP/locomotion_ws/devel/share/common-lisp/ros/locomotion_robot_pkg/msg/sub_move.lisp: /opt/ros/noetic/share/std_msgs/msg/String.msg
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/robotAutonomoUNLP/locomotion_ws/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Generating Lisp code from locomotion_robot_pkg/sub_move.msg"
 	cd /home/robotAutonomoUNLP/locomotion_ws/build/locomotion_robot_pkg && ../catkin_generated/env_cached.sh /usr/bin/python3 /opt/ros/noetic/share/genlisp/cmake/../../../lib/genlisp/gen_lisp.py /home/robotAutonomoUNLP/locomotion_ws/src/locomotion_robot_pkg/msg/sub_move.msg -Ilocomotion_robot_pkg:/home/robotAutonomoUNLP/locomotion_ws/src/locomotion_robot_pkg/msg -Istd_msgs:/opt/ros/noetic/share/std_msgs/cmake/../msg -p locomotion_robot_pkg -o /home/robotAutonomoUNLP/locomotion_ws/devel/share/common-lisp/ros/locomotion_robot_pkg/msg
 
+/home/robotAutonomoUNLP/locomotion_ws/devel/share/common-lisp/ros/locomotion_robot_pkg/msg/sync_type.lisp: /opt/ros/noetic/lib/genlisp/gen_lisp.py
+/home/robotAutonomoUNLP/locomotion_ws/devel/share/common-lisp/ros/locomotion_robot_pkg/msg/sync_type.lisp: /home/robotAutonomoUNLP/locomotion_ws/src/locomotion_robot_pkg/msg/sync_type.msg
+/home/robotAutonomoUNLP/locomotion_ws/devel/share/common-lisp/ros/locomotion_robot_pkg/msg/sync_type.lisp: /opt/ros/noetic/share/std_msgs/msg/UInt8.msg
+/home/robotAutonomoUNLP/locomotion_ws/devel/share/common-lisp/ros/locomotion_robot_pkg/msg/sync_type.lisp: /opt/ros/noetic/share/std_msgs/msg/Float32.msg
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/robotAutonomoUNLP/locomotion_ws/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Generating Lisp code from locomotion_robot_pkg/sync_type.msg"
+	cd /home/robotAutonomoUNLP/locomotion_ws/build/locomotion_robot_pkg && ../catkin_generated/env_cached.sh /usr/bin/python3 /opt/ros/noetic/share/genlisp/cmake/../../../lib/genlisp/gen_lisp.py /home/robotAutonomoUNLP/locomotion_ws/src/locomotion_robot_pkg/msg/sync_type.msg -Ilocomotion_robot_pkg:/home/robotAutonomoUNLP/locomotion_ws/src/locomotion_robot_pkg/msg -Istd_msgs:/opt/ros/noetic/share/std_msgs/cmake/../msg -p locomotion_robot_pkg -o /home/robotAutonomoUNLP/locomotion_ws/devel/share/common-lisp/ros/locomotion_robot_pkg/msg
+
+/home/robotAutonomoUNLP/locomotion_ws/devel/share/common-lisp/ros/locomotion_robot_pkg/msg/motor_speeds.lisp: /opt/ros/noetic/lib/genlisp/gen_lisp.py
+/home/robotAutonomoUNLP/locomotion_ws/devel/share/common-lisp/ros/locomotion_robot_pkg/msg/motor_speeds.lisp: /home/robotAutonomoUNLP/locomotion_ws/src/locomotion_robot_pkg/msg/motor_speeds.msg
+/home/robotAutonomoUNLP/locomotion_ws/devel/share/common-lisp/ros/locomotion_robot_pkg/msg/motor_speeds.lisp: /opt/ros/noetic/share/std_msgs/msg/Float32.msg
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/robotAutonomoUNLP/locomotion_ws/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Generating Lisp code from locomotion_robot_pkg/motor_speeds.msg"
+	cd /home/robotAutonomoUNLP/locomotion_ws/build/locomotion_robot_pkg && ../catkin_generated/env_cached.sh /usr/bin/python3 /opt/ros/noetic/share/genlisp/cmake/../../../lib/genlisp/gen_lisp.py /home/robotAutonomoUNLP/locomotion_ws/src/locomotion_robot_pkg/msg/motor_speeds.msg -Ilocomotion_robot_pkg:/home/robotAutonomoUNLP/locomotion_ws/src/locomotion_robot_pkg/msg -Istd_msgs:/opt/ros/noetic/share/std_msgs/cmake/../msg -p locomotion_robot_pkg -o /home/robotAutonomoUNLP/locomotion_ws/devel/share/common-lisp/ros/locomotion_robot_pkg/msg
+
 locomotion_robot_pkg_generate_messages_lisp: locomotion_robot_pkg/CMakeFiles/locomotion_robot_pkg_generate_messages_lisp
 locomotion_robot_pkg_generate_messages_lisp: /home/robotAutonomoUNLP/locomotion_ws/devel/share/common-lisp/ros/locomotion_robot_pkg/msg/sub_move.lisp
+locomotion_robot_pkg_generate_messages_lisp: /home/robotAutonomoUNLP/locomotion_ws/devel/share/common-lisp/ros/locomotion_robot_pkg/msg/sync_type.lisp
+locomotion_robot_pkg_generate_messages_lisp: /home/robotAutonomoUNLP/locomotion_ws/devel/share/common-lisp/ros/locomotion_robot_pkg/msg/motor_speeds.lisp
 locomotion_robot_pkg_generate_messages_lisp: locomotion_robot_pkg/CMakeFiles/locomotion_robot_pkg_generate_messages_lisp.dir/build.make
 
 .PHONY : locomotion_robot_pkg_generate_messages_lisp
