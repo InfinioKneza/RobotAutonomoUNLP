@@ -11,8 +11,10 @@ SPEED = 50  # Speed of the motors
 WHEEL_DIAMETER = 13.5   # Diameter of the wheels
 ROBOT_DIAMETER = 27  # Diameter of the robot
 PULSES_PER_FULL_REVOLUTION = 2200  # Number of pulses per full revolution
+
 encoder_a_confirmation = False
 encoder_b_confirmation = False
+EXTRA_ANGLE = 45
 
 # Calculate pulses based on distance
 def calculate_pulses_by_distance(distance):
@@ -20,7 +22,8 @@ def calculate_pulses_by_distance(distance):
 
 # Calculate pulses based on angle
 def calculate_pulses_by_angle(angle):
-    distance = (ROBOT_DIAMETER * math.pi) * angle / 360
+    angle += EXTRA_ANGLE
+    distance = (ROBOT_DIAMETER * math.pi) * angle/360
     return calculate_pulses_by_distance(distance)
 
 # Move functions

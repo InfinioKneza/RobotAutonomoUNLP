@@ -8,4 +8,3 @@
 
 # modified environment variables
 export PWD='/home/robotAutonomoUNLP/locomotion_ws/build'
-export PYTHONPATH="/home/robotAutonomoUNLP/locomotion_ws/devel/lib/python3/dist-packages:$PYTHONPATH"

@@ -54,7 +54,7 @@ CMAKE_BINARY_DIR = /home/robotAutonomoUNLP/locomotion_ws/build
 include locomotion_robot_pkg/CMakeFiles/_locomotion_robot_pkg_generate_messages_check_deps_sub_move.dir/progress.make
 
 locomotion_robot_pkg/CMakeFiles/_locomotion_robot_pkg_generate_messages_check_deps_sub_move:
-	cd /home/robotAutonomoUNLP/locomotion_ws/build/locomotion_robot_pkg && ../catkin_generated/env_cached.sh /usr/bin/python3 /opt/ros/noetic/share/genmsg/cmake/../../../lib/genmsg/genmsg_check_deps.py locomotion_robot_pkg /home/robotAutonomoUNLP/locomotion_ws/src/locomotion_robot_pkg/msg/sub_move.msg std_msgs/String:std_msgs/Int32
+	cd /home/robotAutonomoUNLP/locomotion_ws/build/locomotion_robot_pkg && ../catkin_generated/env_cached.sh /usr/bin/python3 /opt/ros/noetic/share/genmsg/cmake/../../../lib/genmsg/genmsg_check_deps.py locomotion_robot_pkg /home/robotAutonomoUNLP/locomotion_ws/src/locomotion_robot_pkg/msg/sub_move.msg std_msgs/Int32:std_msgs/String
 
 _locomotion_robot_pkg_generate_messages_check_deps_sub_move: locomotion_robot_pkg/CMakeFiles/_locomotion_robot_pkg_generate_messages_check_deps_sub_move
 _locomotion_robot_pkg_generate_messages_check_deps_sub_move: locomotion_robot_pkg/CMakeFiles/_locomotion_robot_pkg_generate_messages_check_deps_sub_move.dir/build.make
