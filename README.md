@@ -14,13 +14,15 @@ This project consists of a tri-wheeled robot that uses de ROS framwork to proces
 - [Connection Instructions](#connection-instructions)
 - [Remote Access](#remote-access)
 - [Robot Initialization](#robot-initialization)
-- [Workspace](#workspace)
+- [Taking the Robot Home](#taking-home)
 
 ### Connection Instructions
+<a name="connection-instructions"></a>
 
 For the first iteration of the project, the robot needs to be connected to two 220V power outlets, one using the power jack that is installed on a step down transformer, the second outlet is for the Raspberry Pi 4 that uses an USB C connector.
 
 ### Remote Access
+<a name="remote-access"></a>
 
 Once all powered up, the robot will automatically connect to the univerity's wireless local area network.
 To access it the user must be connected to the same Wi-Fi network.
@@ -51,22 +53,31 @@ After that you will be asked for a password, enter:
 If its the first time you connect via ssh to the device, it will ask to trust it, please entre yes.
 
 ### Robot Initialization
+<a name="robot-initialization"></a>
 
-Once inside the robot, you will be able to see the Linux terminal.
-The 3 terminals previously asked for are one for the actual initialization (ROS Launch), one for running the robot (ROS Run), and one for an emergency stop (Emergency) in case its needed.
+Once inside the robot, to start making your own code routines or sending commands you must change directory to project workspace located at:
+
+<pre>
+  ~/robotAutonomoUNLP/locomotion_ws/src/locomotion_robot_pkg/src/
+</pre>
+
+The 3 terminals previously asked for are one for the actual initialization ([ROS Launch](#ros-launch)), one for running the robot ([ROS Run](#ros-run)), and one for an emergency stop ([Emergency](#ros-emergency)) in case its needed.
+The 3 should all be on the project's workspace
 
 #### ROS Launch
+<a name="ros-launch"></a>
 
-To start the robot please run the command
+To start the robot please run the command. To reduce conflicts we recommend to wait at least 15 seconds before start running the robot (ROS Run) 
 
 ```
   $ roslaunch locomotion_robot_pkg start.launch
 ```
 
 ### ROS Run
+<a name="ros-run"></a>
 
 ```
- rosrun locomotion_robot_pkg locomotion_receptor.py {movement: args} 
+ $ rosrun locomotion_robot_pkg locomotion_receptor.py {movement: args} 
 ```
 
 | Parameter                     | Description                                               |
@@ -75,11 +86,14 @@ To start the robot please run the command
 | `line {length in cm}`         | Moves forward the ammount of cm specifie                  |
 | `square {side lenght in cm}`  | Makes a square of side specified in cm as parameter       |
 
+### Emergency
+<a name="ros-emergency"></a>
 
-## Workspace
+```
+ $ python3 emergency_stop.py 
+```
 
-To start making your own code routines, the workspace is located in
-<pre>
-  ~/robotAutonomoUNLP/locomotion_ws/src/locomotion_robot_pkg/src/
-</pre>
+## Taking the Robot Home
+<a name="taking-home"></a>
 
+In case any of the project participants need to take the robot home, and use it in their own Wi-Fi, the netplan configuration should be changed. Please read how to change this file and how YAML files should be written on.
