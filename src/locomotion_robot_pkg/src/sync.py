@@ -3,9 +3,10 @@ import rospy
 from std_msgs.msg import Int64
 from simple_pid import PID
 from locomotion_robot_pkg.msg import sync_type, motor_speeds
+from constants import SYNC_TIME
 
 # Inicialización de los PID
-pid_motor = PID(Kp=0, Ki=0, Kd=1, setpoint=0)
+pid_motor = PID(Kp=1, Ki=0, Kd=1, setpoint=0)
 
 # Initialize encoder counters
 encoder_a_count = 0
@@ -18,9 +19,6 @@ motor_b_speed = 50  # Saves the initial motor B speed
 count_a_received = False
 count_b_received = False
 
-# Time between encoder readings
-TIME_BETWEEN_READINGS = 0.1
-
 def sync_motors():
     """""Sync motors."""""
     global encoder_a_count, encoder_b_count, count_a_received, count_b_received
@@ -31,7 +29,7 @@ def sync_motors():
         # Calculate difference between encoder counts
         difference = abs(encoder_a_count) - abs(encoder_b_count)
 
-        correction = pid_motor(difference, TIME_BETWEEN_READINGS)
+        correction = pid_motor(difference, SYNC_TIME)
 
         # No make any correction if difference is too small
         if abs(difference) < 100:

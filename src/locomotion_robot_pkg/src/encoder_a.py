@@ -3,13 +3,11 @@ import time
 import rospy
 from std_msgs.msg import Int64, Bool
 import RPi.GPIO as GPIO
+from constants import SYNC_TIME
 
 # Configure encoder pins
 PIN_ENCODER_A1 = 29
 PIN_ENCODER_A2 = 31
-
-# How often to send the number of counted pulses to the sync node
-TIME_BETWEEN_SYNC_UPDATES = 0.1
 
 # Initialize encoder counter
 encoder_count = 0
@@ -49,8 +47,8 @@ def callback_encoder_A(channel):
     # Calculate elapsed time
     elapsed_time = time.time() - start_time
 
-    # Publish encoder count when elapsed time is greater than TIME_BETWEEN_SYNC_UPDATES
-    if elapsed_time >= TIME_BETWEEN_SYNC_UPDATES:
+    # Publish encoder count when elapsed time is greater than SYNC_TIME
+    if elapsed_time >= SYNC_TIME:
         pub_encoder_count.publish(encoder_count)
         start_time = time.time()
 

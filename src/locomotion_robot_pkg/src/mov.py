@@ -4,15 +4,12 @@ import math
 import RPi.GPIO as GPIO
 from std_msgs.msg import Int64, Bool, Empty
 from locomotion_robot_pkg.msg import sub_move, sync_type, motor_speeds
+from constants import ROBOT_DIAMETER, WHEEL_DIAMETER, PULSES_PER_FULL_REVOLUTION, SYNC_ENABLE
 
 # Initialize variables
 go_to_next_sm = False # Flag to indicate if we are going to the next submovemnt
-motor_a_speed = 50
-motor_b_speed = 50
-WHEEL_DIAMETER = 13.5   # Diameter of the wheels
-ROBOT_DIAMETER = 27  # Diameter of the robot
-PULSES_PER_FULL_REVOLUTION = 2200  # Number of pulses per full revolution
-EXTRA_ANGLE = 45
+motor_a_speed = 50  # Initial speed of motor A
+motor_b_speed = 50  # Initial speed of motor B
 
 last_sync_type = -1  # Saves the last sync_type message sent to avoid congestion
 encoder_a_confirmation = False
@@ -24,8 +21,7 @@ def calculate_pulses_by_distance(distance):
 
 # Calculate pulses based on angle
 def calculate_pulses_by_angle(angle):
-    angle += EXTRA_ANGLE
-    distance = (ROBOT_DIAMETER * math.pi) * angle/360
+    distance = (ROBOT_DIAMETER * 2*math.pi) * angle/360
     return calculate_pulses_by_distance(distance)
 
 def sync_movement(_sync_type):
@@ -46,14 +42,15 @@ def sync_movement(_sync_type):
     elif _sync_type == 1:
         pass  # When the sync_type is weighted, use for curve movement
 
-
 # Move functions
 def forward(args):
     global pub_pulses_to_a, pub_pulses_to_b, motor_a_speed, motor_b_speed
 
     pulses = calculate_pulses_by_distance(args[0])
 
-    sync_movement(0)
+    if SYNC_ENABLE:
+        sync_movement(0)
+    
     pub_pulses_to_a.publish(pulses)
     pub_pulses_to_b.publish(pulses)
 
@@ -65,7 +62,9 @@ def reverse(args):
 
     pulses = calculate_pulses_by_distance(args[0])
 
-    sync_movement(0)
+    if SYNC_ENABLE:
+        sync_movement(0)
+
     pub_pulses_to_a.publish(-pulses)  # Negative because we are going backwards
     pub_pulses_to_b.publish(-pulses)
 
@@ -77,7 +76,9 @@ def left(args):
 
     pulses = calculate_pulses_by_angle(args[1])
 
-    sync_movement(0)
+    if SYNC_ENABLE:
+        sync_movement(0)
+    
     pub_pulses_to_a.publish(pulses)
     pub_pulses_to_b.publish(-pulses)
 
@@ -89,7 +90,9 @@ def right(args):
 
     pulses = calculate_pulses_by_angle(args[1])
 
-    sync_movement(0)
+    if SYNC_ENABLE:
+        sync_movement(0)
+    
     pub_pulses_to_a.publish(-pulses)
     pub_pulses_to_b.publish(pulses)
 
@@ -123,6 +126,9 @@ def runMotor(motor, spd, direction):
 
 def update_speeds_cb(motor_speeds_msg):
     global motor_a_speed, motor_b_speed
+
+    if not SYNC_ENABLE:
+        return
 
     motor_a_speed = float(motor_speeds_msg.vel_a.data)  # Get motor A speed
     motor_b_speed = float(motor_speeds_msg.vel_b.data)  # Get motor B speed
