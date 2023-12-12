@@ -8,6 +8,9 @@ import RPi.GPIO as GPIO
 PIN_ENCODER_B1 = 35
 PIN_ENCODER_B2 = 37
 
+# How often to send the number of counted pulses to the sync node
+TIME_BETWEEN_SYNC_UPDATES = 0.1
+
 # Initialize encoder counter
 encoder_count = 0
 target = 0  # Target encoder count
@@ -47,8 +50,8 @@ def callback_encoder_B(channel):
     # Calculate elapsed time
     elapsed_time = time.time() - start_time
 
-    # Publish encoder count when elapsed time is greater than 0.1
-    if elapsed_time > 0.1:
+    # Publish encoder count when elapsed time is greater than TIME_BETWEEN_SYNC_UPDATES
+    if elapsed_time >= TIME_BETWEEN_SYNC_UPDATES:
         pub_encoder_count.publish(encoder_count)
         start_time = time.time()
 
@@ -69,7 +72,6 @@ def send_ready():
     """""Send ready message to the controller."""""
     global counting, pub_ready
 
-    print("Counted from B!")
     counting = False
     pub_ready.publish(True)
 
@@ -77,8 +79,6 @@ def send_ready():
 def start_counting_cb(data):
     """""Callback function for start_counting_b."""""
     global encoder_count, counting, target
-
-    print("Starting counting from B")
 
     target = int(data.data)  # Get target encoder count
     encoder_count = 0  # Resets counter
