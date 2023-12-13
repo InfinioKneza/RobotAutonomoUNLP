@@ -27,7 +27,7 @@ To access it the user must be connected to the same Wi-Fi network.
 </pre>
 
 You can now connect to the robot via ssh, for that you will need the robot ip address.
-We used the 3rd party mobile app "Fing" to recognise the "Raspberry Pi" device and figure out the ip address.
+We used the 3rd party mobile app [Fing](https://play.google.com/store/apps/details?id=com.overlook.android.fing&hl=es&gl=US) to recognise the Raspberry Pi device and figure out the ip address.
 
 With both previous steps done (Connect to UNLP Informatica Wi-Fi, and knowing device ip address), you can now access remotely via ssh.
 On your pcs vsCode, you can use the "Connect to Host" feature. Or you can do this on your pcs terminal.
@@ -45,7 +45,7 @@ After that you will be asked for a password, enter:
   undertaker
 </pre>
 
-If its the first time you connect via ssh to the device, it will ask to trust it, please entre yes.
+If its the first time you connect via ssh to the device, it will ask to trust it, please enter yes.
 
 ### Robot Initialization
 <a name="robot-initialization"></a>
@@ -72,13 +72,13 @@ To start the robot please run the command. To reduce conflicts we recommend to w
 <a name="ros-run"></a>
 
 ```
- $ rosrun locomotion_robot_pkg locomotion_receptor.py {movement: args} 
+ $ rosrun locomotion_robot_pkg locomotion_receptor.py [movement] [args] 
 ```
 
 | Parameter                     | Description                                               |
 |-------------------------------|-----------------------------------------------------------|
 | `test`                        | Moves forward, then backwards, then turns left, then right|
-| `line {length in cm}`         | Moves forward the ammount of cm specifie                  |
+| `line {length in cm}`         | Moves forward the ammount of cm specified                 |
 | `square {side lenght in cm}`  | Makes a square of side specified in cm as parameter       |
 
 #### Emergency
