@@ -103,5 +103,3 @@ In case any of the project participants need to take the robot home, and use it 
 <a name="license"></a>
 
 MIT License
-
-**Disclaimer: We are sharing codes for academic purposes under the MIT education license. Nothing herein is financial advice, and NOT a recommendation to trade real money. Please use common sense and always first consult a professional before trading or investing.**
