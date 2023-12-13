@@ -1,4 +1,9 @@
 # RobotAutonomoUNLP
+
+<p align="center">
+  <img width="400" src="https://github.com/InfinioKneza/RobotAutonomoUNLP/blob/master/blob/master/robot/robot-cover.jpg" alt="Autonomous robot cover image">
+</p>
+
 Initial project of an autonomous robot led by a group of students from the Real-Time Systems course at UNLP (National University of La Plata).
 
 ## Overview
@@ -10,6 +15,7 @@ This project consists of a tri-wheeled robot that uses de ROS framwork to proces
 - [Remote Access](#remote-access)
 - [Robot Initialization](#robot-initialization)
 - [Taking the Robot Home](#taking-home)
+- [LICENSE](#license)
 
 ### Connection Instructions
 <a name="connection-instructions"></a>
@@ -92,3 +98,10 @@ To start the robot please run the command. To reduce conflicts we recommend to w
 <a name="taking-home"></a>
 
 In case any of the project participants need to take the robot home, and use it in their own Wi-Fi, the netplan configuration should be changed. Please read how to change this file and how YAML files should be written on.
+
+### LICENSE
+<a name="license"></a>
+
+MIT License
+
+**Disclaimer: We are sharing codes for academic purposes under the MIT education license. Nothing herein is financial advice, and NOT a recommendation to trade real money. Please use common sense and always first consult a professional before trading or investing.**
