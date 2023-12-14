@@ -1,12 +1,10 @@
 import RPi.GPIO as GPIO
 
-GPIO.setmode(GPIO.BOARD)     # Set GPIO mode to BCM
-pwm_pin = 22
+GPIO.setmode(GPIO.BOARD)  # Set GPIO pin numbering mode to BOARD
+STBY_PIN = 22  # Define the pin for STBY on the motor driver
 
-GPIO.setup(pwm_pin, GPIO.OUT)    # STBY
-pwm = GPIO.PWM(pwm_pin, 1) 
+GPIO.setup(STBY_PIN, GPIO.OUT)  # Set STBY pin as an output
+stby = GPIO.PWM(STBY_PIN, 1)  # Create PWM object for STBY pin (1Hz)
 
-# Stop PWM
-pwm.stop()
-
-GPIO.cleanup()
+stby.stop()  # Stop motors by activating standby mode
+GPIO.cleanup()  # Clean up GPIO resources
