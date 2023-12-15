@@ -15,6 +15,7 @@ This project consists of a tri-wheeled robot that uses de ROS framwork to proces
 - [Remote Access](#remote-access)
 - [Robot Initialization](#robot-initialization)
 - [Taking the Robot Home](#taking-home)
+- [Contributing](#contributing)
 - [LICENSE](#license)
 
 ### Connection Instructions
@@ -98,6 +99,61 @@ To start the robot please run the command. To reduce conflicts we recommend to w
 <a name="taking-home"></a>
 
 In case any of the project participants need to take the robot home, and use it in their own Wi-Fi, the netplan configuration should be changed. Please read how to change this file and how YAML files should be written on.
+
+## Contributing
+<a name="contributing"></a>
+
+Thank you for considering contributing to this robot's code repository! Here are the steps to follow for making contributions:
+
+### Step 1: Fetch and Pull from the Repository
+
+Ensure that you have the latest changes by fetching and pulling from this repository into the robot local system.
+
+```bash
+# Fetch and pull the latest changes
+git fetch origin
+git pull origin master
+```
+
+### Step 2: Changing the Remote Repository
+
+As the code repository within the robot needs to point to a new remote repository, follow these commands to clone this repository and set up a new remote repository:
+
+Clone this repository to your local machine
+```bash
+git clone https://github.com/InfinioKneza/RobotAutonomoUNLP.git
+```
+
+Navigate into the cloned directory
+```bash
+cd your-robot-repo
+```
+
+Create a new repository on GitHub (if not created already) and get its URL
+
+Set the new remote URL for the repository in the robot
+```bash
+git remote set-url origin https://github.com/your-username/your-new-remote-repo.git
+```
+
+Verify the new remote URL
+```bash
+git remote -v
+```
+
+### Step 3: Make Changes and Push
+Make the necessary changes to the code within the robot and commit the changes using Git. Push the changes to the new remote repository:
+
+```bash
+# Add your changes
+git add .
+
+# Commit the changes
+git commit -m "Describe your changes here"
+
+# Push the changes to the new remote repository
+git push origin master
+```
 
 ### LICENSE
 <a name="license"></a>
