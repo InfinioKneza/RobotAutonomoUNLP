@@ -7,7 +7,7 @@
 Initial project of an autonomous robot led by a group of students from the Real-Time Systems course at UNLP (National University of La Plata).
 
 ## Overview
-This project consists of a tri-wheeled robot that uses de ROS framwork to process scripts and move making geometric figures with its path, also implementing a control system so the movement is smooth and syncronized.
+This project consists of a tri-wheeled robot that uses the ROS framework to process scripts and move making geometric figures with its path, also implementing a control system so the movement is smooth and syncronized.
 
 ## Getting Started
 
